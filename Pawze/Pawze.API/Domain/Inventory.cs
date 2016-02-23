@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pawze.API.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,6 +8,22 @@ namespace Pawze.API.Domain
 {
     public class Inventory
     {
+        public Inventory()
+        {
+
+        }
+        public Inventory(InventoriesModel inventory)
+        {
+            this.Update(inventory);
+        }
+
+        public void Update(InventoriesModel inventory)
+        {
+            InventoryId = inventory.InventoryId;
+            Name = inventory.Name;
+            Description = inventory.Description;
+            QuantityOnHand = inventory.QuantityOnHand;
+        }
 
         public int InventoryId { get; set; }
         public string Name { get; set; }

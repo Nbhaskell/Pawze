@@ -19,7 +19,7 @@ namespace Pawze.API.Infrastructure
         public IDbSet<Subscription> Subscription { get; set; }
         public IDbSet<PawzeUser> PawzeUsers { get; set; }
         public IDbSet<Shipment> Shipment { get; set; }
-        public IDbSet<Configuration> Configuration { get; set; }
+        public IDbSet<PawzeConfiguration> PawzeConfiguration { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -54,5 +54,11 @@ namespace Pawze.API.Infrastructure
 
             base.OnModelCreating(modelBuilder);
         }
+
+        public System.Data.Entity.DbSet<Pawze.API.Domain.Subscription> Subscriptions { get; set; }
+
+        public System.Data.Entity.DbSet<Pawze.API.Domain.PawzeConfiguration> PawzeConfigurations { get; set; }
+
+        public System.Data.Entity.DbSet<Pawze.API.Domain.Shipment> Shipments { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pawze.API.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,6 +8,23 @@ namespace Pawze.API.Domain
 {
     public class BoxItem
     {
+        public BoxItem()
+        {
+
+        }
+
+        public BoxItem(BoxItemsModel boxItem)
+        {
+            this.Update(boxItem);
+        }
+
+        public void Update(BoxItemsModel boxItem)
+        {
+            BoxItemId = boxItem.BoxItemId;
+            BoxId = boxItem.BoxId;
+            InventoryId = boxItem.InventoryId;
+            BoxItemPrice = boxItem.BoxItemPrice;
+        }
 
         public int BoxItemId { get; set; }
         public int BoxId { get; set; }
