@@ -20,11 +20,11 @@ namespace Pawze.API.Domain
 
         public void Update(PawzeConfigurationsModel configuration)
         {
-            ConfigurationId = configuration.ConfigurationId;
+            PawzeConfigurationId = configuration.PawzeConfigurationId;
             CurrentBoxItemPrice = configuration.CurrentBoxItemPrice;
         }
 
-        public int ConfigurationId { get; set; }
+        public int PawzeConfigurationId { get; set; }
         public decimal CurrentBoxItemPrice { get; set; }
     }
 }

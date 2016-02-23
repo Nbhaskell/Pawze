@@ -91,7 +91,7 @@ namespace Pawze.API.Controllers
 
             var dbBox = new Box();
 
-            dbBox.PawzeUser = db.PawzeUsers.FirstOrDefault(u => u.UserName == User.Identity.Name);
+            dbBox.PawzeUser = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
 
             dbBox.Update(box);
 

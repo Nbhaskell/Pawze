@@ -1,4 +1,5 @@
-﻿using Pawze.API.Domain;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Pawze.API.Domain;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,7 +8,7 @@ using System.Web;
 
 namespace Pawze.API.Infrastructure
 {
-    public class PawzeDataContext : DbContext
+    public class PawzeDataContext : IdentityDbContext<PawzeUser>
     {
         public PawzeDataContext() : base("Pawze")
         {
@@ -16,10 +17,10 @@ namespace Pawze.API.Infrastructure
         public IDbSet<Box> Boxes { get; set; }
         public IDbSet<BoxItem> BoxItems { get; set; }
         public IDbSet<Inventory> Inventories { get; set; }
-        public IDbSet<Subscription> Subscription { get; set; }
-        public IDbSet<PawzeUser> PawzeUsers { get; set; }
-        public IDbSet<Shipment> Shipment { get; set; }
-        public IDbSet<PawzeConfiguration> PawzeConfiguration { get; set; }
+        public IDbSet<Subscription> Subscriptions { get; set; }
+        public IDbSet<Shipment> Shipments { get; set; }
+        public IDbSet<PawzeConfiguration> PawzeConfigurations { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -55,10 +56,5 @@ namespace Pawze.API.Infrastructure
             base.OnModelCreating(modelBuilder);
         }
 
-        public System.Data.Entity.DbSet<Pawze.API.Domain.Subscription> Subscriptions { get; set; }
-
-        public System.Data.Entity.DbSet<Pawze.API.Domain.PawzeConfiguration> PawzeConfigurations { get; set; }
-
-        public System.Data.Entity.DbSet<Pawze.API.Domain.Shipment> Shipments { get; set; }
     }
 }

@@ -102,7 +102,7 @@ namespace Pawze.API.Controllers
 
             var dbSubscription = new Subscription();
 
-            dbSubscription.PawzeUser = db.PawzeUsers.FirstOrDefault(u => u.UserName == User.Identity.Name);
+            dbSubscription.PawzeUser = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
 
             dbSubscription.Update(subscription);
 

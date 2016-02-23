@@ -45,7 +45,7 @@ namespace Pawze.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != configuration.ConfigurationId)
+            if (id != configuration.PawzeConfigurationId)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace Pawze.API.Controllers
             db.PawzeConfigurations.Add(configuration);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = configuration.ConfigurationId }, configuration);
+            return CreatedAtRoute("DefaultApi", new { id = configuration.PawzeConfigurationId }, configuration);
         }
 
         // DELETE: api/Configurations/5
@@ -113,7 +113,7 @@ namespace Pawze.API.Controllers
 
         private bool ConfigurationExists(int id)
         {
-            return db.PawzeConfigurations.Count(e => e.ConfigurationId == id) > 0;
+            return db.PawzeConfigurations.Count(e => e.PawzeConfigurationId == id) > 0;
         }
     }
 }

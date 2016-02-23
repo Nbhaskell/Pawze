@@ -7,7 +7,7 @@ namespace Pawze.API.Models
 {
     public class PawzeConfigurationsModel
     {
-        public int ConfigurationId { get; set; }
+        public int PawzeConfigurationId { get; set; }
         public decimal CurrentBoxItemPrice { get; set; }
     }
 }

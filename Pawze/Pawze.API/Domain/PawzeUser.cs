@@ -1,4 +1,5 @@
-﻿using Pawze.API.Models;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Pawze.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Web;
 
 namespace Pawze.API.Domain
 {
-    public class PawzeUser
+    public class PawzeUser : IdentityUser
     {
         public PawzeUser()
         {
@@ -19,7 +20,6 @@ namespace Pawze.API.Domain
 
         public void Update(PawzeUsersModel pawzeUser)
         {
-            PawzeUserId = pawzeUser.PawzeUserId;
             UserName = pawzeUser.UserName;
             StripeId = pawzeUser.StripeId;
             FirstName = pawzeUser.FirstName;
@@ -33,12 +33,10 @@ namespace Pawze.API.Domain
             State = pawzeUser.State;
             PostCode = pawzeUser.PostCode;
             International = pawzeUser.International;
-            Telephone = pawzeUser.Telephone;
-            EmailAddress = pawzeUser.EmailAddress;
+            PhoneNumber = pawzeUser.PhoneNumber;
+            Email = pawzeUser.Email;
         }
-
-        public string PawzeUserId { get; set; }
-        public string UserName { get; set; }
+        
         public string StripeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -51,8 +49,8 @@ namespace Pawze.API.Domain
         public string State { get; set; }
         public string PostCode { get; set; }
         public bool? International { get; set; }
-        public string Telephone { get; set; }
-        public string EmailAddress { get; set; }
+        //public string Telephone { get; set; } use PhoneNumber
+        //public string EmailAddress { get; set; }  use Email
         
 
         public virtual ICollection<Subscription> Subscriptions { get; set; }

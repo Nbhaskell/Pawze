@@ -23,7 +23,7 @@ namespace Pawze.API.Controllers
         public IEnumerable<PawzeUsersModel> GetPawzeUsers()
         {
             return Mapper.Map<IEnumerable<PawzeUsersModel>>(
-                db.PawzeUsers
+                db.Users
             );
         }
 
@@ -31,7 +31,7 @@ namespace Pawze.API.Controllers
         [ResponseType(typeof(PawzeUsersModel))]
         public IHttpActionResult GetPawzeUser(string id)
         {
-            PawzeUser dbPawzeUser = db.PawzeUsers.Find(id);
+            PawzeUser dbPawzeUser = db.Users.Find(id);
 
             if (dbPawzeUser == null)
             {
@@ -50,12 +50,12 @@ namespace Pawze.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != pawzeUser.PawzeUserId)
+            if (id != pawzeUser.Id)
             {
                 return BadRequest();
             }
 
-            PawzeUser dbPawzeUser = db.PawzeUsers.Find(id);
+            PawzeUser dbPawzeUser = db.Users.Find(id);
             dbPawzeUser.Update(pawzeUser);
 
             db.Entry(dbPawzeUser).State = EntityState.Modified;
@@ -89,7 +89,7 @@ namespace Pawze.API.Controllers
             }
 
             var dbPawzeUser = new PawzeUser();
-            db.PawzeUsers.Add(dbPawzeUser);
+            db.Users.Add(dbPawzeUser);
 
             try
             {
@@ -97,7 +97,7 @@ namespace Pawze.API.Controllers
             }
             catch (DbUpdateException)
             {
-                if (PawzeUserExists(pawzeUser.PawzeUserId))
+                if (PawzeUserExists(pawzeUser.Id))
                 {
                     return Conflict();
                 }
@@ -107,22 +107,22 @@ namespace Pawze.API.Controllers
                 }
             }
 
-            pawzeUser.PawzeUserId = dbPawzeUser.PawzeUserId;
+            pawzeUser.Id = dbPawzeUser.Id;
 
-            return CreatedAtRoute("DefaultApi", new { id = pawzeUser.PawzeUserId }, pawzeUser);
+            return CreatedAtRoute("DefaultApi", new { id = pawzeUser.Id }, pawzeUser);
         }
 
         // DELETE: api/PawzeUsers/5
         [ResponseType(typeof(PawzeUsersModel))]
         public IHttpActionResult DeletePawzeUser(string id)
         {
-            PawzeUser pawzeUser = db.PawzeUsers.Find(id);
+            PawzeUser pawzeUser = db.Users.Find(id);
             if (pawzeUser == null)
             {
                 return NotFound();
             }
 
-            db.PawzeUsers.Remove(pawzeUser);
+            db.Users.Remove(pawzeUser);
             db.SaveChanges();
 
             return Ok(Mapper.Map<PawzeUsersModel>(pawzeUser));
@@ -139,7 +139,7 @@ namespace Pawze.API.Controllers
 
         private bool PawzeUserExists(string id)
         {
-            return db.PawzeUsers.Count(e => e.PawzeUserId == id) > 0;
+            return db.Users.Count(e => e.Id == id) > 0;
         }
     }
 }
