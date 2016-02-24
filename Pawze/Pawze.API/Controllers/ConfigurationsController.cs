@@ -13,6 +13,7 @@ using Pawze.API.Infrastructure;
 
 namespace Pawze.API.Controllers
 {
+    [Authorize]
     public class PawzeConfigurationsController : ApiController
     {
         private PawzeDataContext db = new PawzeDataContext();

@@ -15,6 +15,7 @@ using AutoMapper;
 
 namespace Pawze.API.Controllers
 {
+    [Authorize]
     public class BoxesController : ApiController
     {
         private PawzeDataContext db = new PawzeDataContext();

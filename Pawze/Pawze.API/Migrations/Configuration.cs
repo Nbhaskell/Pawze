@@ -26,6 +26,13 @@ namespace Pawze.API.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            // Add these roles if they don't exist
+            context.Roles.AddOrUpdate(r => r.Name,
+                new Microsoft.AspNet.Identity.EntityFramework.IdentityRole("Customer"),
+                new Microsoft.AspNet.Identity.EntityFramework.IdentityRole("Admin"),
+                new Microsoft.AspNet.Identity.EntityFramework.IdentityRole("Staff"));
+
         }
     }
 }

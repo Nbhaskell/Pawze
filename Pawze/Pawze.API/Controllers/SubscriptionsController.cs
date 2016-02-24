@@ -15,6 +15,7 @@ using Pawze.API.Models;
 
 namespace Pawze.API.Controllers
 {
+    [Authorize]
     public class SubscriptionsController : ApiController
     {
         private PawzeDataContext db = new PawzeDataContext();
