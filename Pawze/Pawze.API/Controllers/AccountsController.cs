@@ -1,5 +1,6 @@
 ﻿using Pawze.API.Infrastructure;
-using Pawze.API.Models;
+using Pawze.Core.Infrastructure;
+using Pawze.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,12 @@ namespace Pawze.API.Controllers
 {
     public class AccountsController : ApiController
     {
-        private AuthorizationRepository _repo = new AuthorizationRepository();
+        private IAuthorizationRepository _repo;
+
+        public AccountsController(IAuthorizationRepository repo)
+        {
+            _repo = repo;
+        }
 
         [AllowAnonymous]
         [Route("api/accounts/register/customers")]
@@ -77,11 +83,6 @@ namespace Pawze.API.Controllers
             {
                 return BadRequest("Registration form was invalid.");
             }
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            _repo.Dispose();
         }
     }
 }

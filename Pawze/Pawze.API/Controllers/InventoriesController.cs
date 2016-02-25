@@ -1,38 +1,42 @@
-﻿using System;
+﻿using AutoMapper;
+using Pawze.Core.Domain;
+using Pawze.Core.Infrastructure;
+using Pawze.Core.Models;
+using Pawze.Core.Repository;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Pawze.API.Domain;
-using Pawze.API.Infrastructure;
-using Pawze.API.Models;
-using AutoMapper;
 
 namespace Pawze.API.Controllers
 {
     [Authorize]
     public class InventoriesController : ApiController
     {
-        private PawzeDataContext db = new PawzeDataContext();
+        private IInventoryRepository _inventoryRepository;
+        private IUnitOfWork _unitOfWork;
+
+        public InventoriesController(IInventoryRepository inventoryRepository, IUnitOfWork unitOfWork)
+        {
+            _inventoryRepository = inventoryRepository;
+            _unitOfWork = unitOfWork;
+        }
 
         // GET: api/Inventories
         public IEnumerable<InventoriesModel> GetInventories()
         {
             return Mapper.Map<IEnumerable<InventoriesModel>>(
-                db.Inventories
-                );
+                _inventoryRepository.GetAll()
+            );
         }
 
         // GET: api/Inventories/5
         [ResponseType(typeof(InventoriesModel))]
         public IHttpActionResult GetInventory(int id)
         {
-            Inventory dbInventory = db.Inventories.Find(id);
+            Inventory dbInventory = _inventoryRepository.GetById(id);
+
             if (dbInventory == null)
             {
                 return NotFound();
@@ -55,16 +59,16 @@ namespace Pawze.API.Controllers
                 return BadRequest();
             }
 
-            Inventory dbInventory = db.Inventories.Find(id);
+            Inventory dbInventory = _inventoryRepository.GetById(id);
             dbInventory.Update(inventory);
 
-            db.Entry(dbInventory).State = EntityState.Modified;
+            _inventoryRepository.Update(dbInventory);
 
             try
             {
-                db.SaveChanges();
+                _unitOfWork.Commit();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
                 if (!InventoryExists(id))
                 {
@@ -89,9 +93,9 @@ namespace Pawze.API.Controllers
             }
 
             var dbInventory = new Inventory();
-            db.Inventories.Add(dbInventory);
+            _inventoryRepository.Add(dbInventory);
 
-            db.SaveChanges();
+            _unitOfWork.Commit();
 
             inventory.InventoryId = dbInventory.InventoryId;
 
@@ -102,30 +106,21 @@ namespace Pawze.API.Controllers
         [ResponseType(typeof(InventoriesModel))]
         public IHttpActionResult DeleteInventory(int id)
         {
-            Inventory inventory = db.Inventories.Find(id);
+            Inventory inventory = _inventoryRepository.GetById(id);
             if (inventory == null)
             {
                 return NotFound();
             }
 
-            db.Inventories.Remove(inventory);
-            db.SaveChanges();
+            _inventoryRepository.Delete(inventory);
+            _unitOfWork.Commit();
 
             return Ok(Mapper.Map<InventoriesModel>(inventory));
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         private bool InventoryExists(int id)
         {
-            return db.Inventories.Count(e => e.InventoryId == id) > 0;
+            return _inventoryRepository.Count(e => e.InventoryId == id) > 0;
         }
     }
 }

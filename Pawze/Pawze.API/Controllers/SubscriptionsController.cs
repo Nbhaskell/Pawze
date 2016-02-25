@@ -1,43 +1,41 @@
-﻿using System;
+﻿using AutoMapper;
+using Pawze.Core.Domain;
+using Pawze.Core.Infrastructure;
+using Pawze.Core.Models;
+using Pawze.Core.Repository;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Pawze.API.Domain;
-using Pawze.API.Infrastructure;
-using AutoMapper;
-using Pawze.API.Models;
 
 namespace Pawze.API.Controllers
 {
     [Authorize]
     public class SubscriptionsController : ApiController
     {
-        private PawzeDataContext db = new PawzeDataContext();
+        private ISubscriptionRepository _subscriptionRepository;
+        private IUnitOfWork _unitOfWork;
+
+        public SubscriptionsController(ISubscriptionRepository subscriptionRepository, IUnitOfWork unitOfWork)
+        {
+            _subscriptionRepository = subscriptionRepository;
+            _unitOfWork = unitOfWork;
+        }
 
         // GET: api/Subscriptions
         public IEnumerable<SubscriptionsModel> GetSubscriptions()
         {
             return Mapper.Map<IEnumerable<SubscriptionsModel>>(
-                db.Subscriptions.Where(s => s.PawzeUser.UserName == User.Identity.Name));
+                _subscriptionRepository.GetAll()
+            );
         }
 
         // GET: api/Subscriptions/5
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [ResponseType(typeof(SubscriptionsModel))]
         public IHttpActionResult GetSubscription(int id)
         {
-            // Subscription subscription = db.Subscriptions.Find(id);
-            Subscription dbSubscription = db.Subscriptions.FirstOrDefault(s => s.PawzeUser.UserName == User.Identity.Name && s.SubscriptionId == id);
+            Subscription dbSubscription = _subscriptionRepository.GetById(id);
 
             if (dbSubscription == null)
             {
@@ -50,34 +48,27 @@ namespace Pawze.API.Controllers
         // PUT: api/Subscriptions/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutSubscription(int id, SubscriptionsModel subscription)
-
-        { 
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            Subscription dbSubscription = db.Subscriptions.FirstOrDefault(s => s.PawzeUser.UserName == User.Identity.Name && s.SubscriptionId == id);
 
             if (id != subscription.SubscriptionId)
             {
                 return BadRequest();
             }
 
-            if(dbSubscription == null)
-            {
-                return BadRequest();
-            }
-
+            Subscription dbSubscription = _subscriptionRepository.GetById(id);
             dbSubscription.Update(subscription);
 
-            db.Entry(dbSubscription).State = EntityState.Modified;
+            _subscriptionRepository.Update(dbSubscription);
 
             try
             {
-                db.SaveChanges();
+                _unitOfWork.Commit();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
                 if (!SubscriptionExists(id))
                 {
@@ -102,13 +93,9 @@ namespace Pawze.API.Controllers
             }
 
             var dbSubscription = new Subscription();
+            _subscriptionRepository.Add(dbSubscription);
 
-            dbSubscription.PawzeUser = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
-
-            dbSubscription.Update(subscription);
-
-            db.Subscriptions.Add(dbSubscription);
-            db.SaveChanges();
+            _unitOfWork.Commit();
 
             subscription.SubscriptionId = dbSubscription.SubscriptionId;
 
@@ -119,33 +106,21 @@ namespace Pawze.API.Controllers
         [ResponseType(typeof(SubscriptionsModel))]
         public IHttpActionResult DeleteSubscription(int id)
         {
-            // Subscription subscription = db.Subscriptions.Find(id);
-
-            Subscription dbSubscription = db.Subscriptions.FirstOrDefault(s => s.PawzeUser.UserName == User.Identity.Name && s.SubscriptionId == id);
-        
-            if (dbSubscription == null)
+            Subscription subscription = _subscriptionRepository.GetById(id);
+            if (subscription == null)
             {
                 return NotFound();
             }
 
-            db.Subscriptions.Remove(dbSubscription);
-            db.SaveChanges();
+            _subscriptionRepository.Delete(subscription);
+            _unitOfWork.Commit();
 
-            return Ok(Mapper.Map<SubscriptionsModel>(dbSubscription));
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return Ok(Mapper.Map<SubscriptionsModel>(subscription));
         }
 
         private bool SubscriptionExists(int id)
         {
-            return db.Subscriptions.Count(e => e.SubscriptionId == id) > 0;
+            return _subscriptionRepository.Count(e => e.SubscriptionId == id) > 0;
         }
     }
 }

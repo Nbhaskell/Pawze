@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using Pawze.API.Domain;
-using Pawze.API.Models;
-using System;
-using System.Collections.Generic;
+using Pawze.Core.Domain;
+using Pawze.Core.Models;
 using System.Linq;
 using System.Web.Http;
 
@@ -27,7 +25,7 @@ namespace Pawze.API
 
             CreateMaps();
         }
-        private static void CreateMaps()
+        public static void CreateMaps()
         {
             Mapper.CreateMap<Box, BoxesModel>();
             Mapper.CreateMap<BoxItem, BoxItemsModel>();
