@@ -149,7 +149,6 @@
     <Compile Include="Controllers\BoxesController.cs" />
     <Compile Include="Controllers\BoxItemsController.cs" />
     <Compile Include="Controllers\ConfigurationsController.cs" />
-    <Compile Include="Controllers\DummyController.cs" />
     <Compile Include="Controllers\InventoriesController.cs" />
     <Compile Include="Controllers\PawzeUsersController.cs" />
     <Compile Include="Controllers\ShipmentsController.cs" />
