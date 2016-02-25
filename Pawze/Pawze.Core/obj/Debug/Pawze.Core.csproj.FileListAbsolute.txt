@@ -1,0 +1,7 @@
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Core\obj\Debug\Pawze.Core.csprojResolveAssemblyReference.cache
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Core\bin\Debug\Pawze.Core.dll
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Core\bin\Debug\Pawze.Core.pdb
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Core\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Core\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Core\obj\Debug\Pawze.Core.dll
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Core\obj\Debug\Pawze.Core.pdb

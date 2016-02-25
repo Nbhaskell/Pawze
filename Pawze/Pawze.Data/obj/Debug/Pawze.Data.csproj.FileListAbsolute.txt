@@ -1,0 +1,16 @@
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\obj\Debug\Pawze.Data.csprojResolveAssemblyReference.cache
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\bin\Debug\Pawze.Data.dll.config
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\bin\Debug\Pawze.Data.dll
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\bin\Debug\Pawze.Data.pdb
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\bin\Debug\EntityFramework.dll
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\bin\Debug\Pawze.Core.dll
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\bin\Debug\Pawze.Core.pdb
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\bin\Debug\EntityFramework.xml
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\obj\Debug\Pawze.Data.dll
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\obj\Debug\Pawze.Data.pdb
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\obj\Debug\Pawze.Data.Migrations.InitialCreate.resources
+C:\dev\github\nbhaskell\Pawze\Pawze\Pawze.Data\obj\Debug\Pawze.Data.csproj.GenerateResource.Cache

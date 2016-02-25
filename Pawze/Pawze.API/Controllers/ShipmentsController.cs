@@ -1,30 +1,33 @@
-﻿using System;
+﻿using AutoMapper;
+using Pawze.Core.Domain;
+using Pawze.Core.Infrastructure;
+using Pawze.Core.Models;
+using Pawze.Core.Repository;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Pawze.API.Domain;
-using Pawze.API.Infrastructure;
-using Pawze.API.Models;
-using AutoMapper;
 
 namespace Pawze.API.Controllers
 {
     [Authorize]
     public class ShipmentsController : ApiController
     {
-        private PawzeDataContext db = new PawzeDataContext();
+        private IShipmentRepository _shipmentRepository;
+        private IUnitOfWork _unitOfWork;
+
+        public ShipmentsController(IShipmentRepository shipmentRepository, IUnitOfWork unitOfWork)
+        {
+            _shipmentRepository = shipmentRepository;
+            _unitOfWork = unitOfWork;
+        }
 
         // GET: api/Shipments
         public IEnumerable<ShipmentsModel> GetShipments()
         {
             return Mapper.Map<IEnumerable<ShipmentsModel>>(
-                db.Shipments.Where(s => s.Subscription.PawzeUser.UserName == User.Identity.Name)               
+                _shipmentRepository.GetAll()
             );
         }
 
@@ -32,8 +35,7 @@ namespace Pawze.API.Controllers
         [ResponseType(typeof(ShipmentsModel))]
         public IHttpActionResult GetShipment(int id)
         {
-            // Shipment dbShipment = db.Shipments.Find(id);
-            Shipment dbShipment = db.Shipments.FirstOrDefault(s => s.Subscription.PawzeUser.UserName == User.Identity.Name && s.ShipmentId == id);
+            Shipment dbShipment = _shipmentRepository.GetById(id);
 
             if (dbShipment == null)
             {
@@ -52,22 +54,21 @@ namespace Pawze.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            Shipment dbShipment = db.Shipments.FirstOrDefault(s => s.Subscription.PawzeUser.UserName == User.Identity.Name && s.ShipmentId == id);
-
             if (id != shipment.ShipmentId)
             {
                 return BadRequest();
             }
 
+            Shipment dbShipment = _shipmentRepository.GetById(id);
             dbShipment.Update(shipment);
 
-            db.Entry(dbShipment).State = EntityState.Modified;
+            _shipmentRepository.Update(dbShipment);
 
             try
             {
-                db.SaveChanges();
+                _unitOfWork.Commit();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
                 if (!ShipmentExists(id))
                 {
@@ -92,11 +93,9 @@ namespace Pawze.API.Controllers
             }
 
             var dbShipment = new Shipment();
+            _shipmentRepository.Add(dbShipment);
 
-            dbShipment.Update(shipment);
-
-            db.Shipments.Add(dbShipment);
-            db.SaveChanges();
+            _unitOfWork.Commit();
 
             shipment.ShipmentId = dbShipment.ShipmentId;
 
@@ -107,32 +106,21 @@ namespace Pawze.API.Controllers
         [ResponseType(typeof(ShipmentsModel))]
         public IHttpActionResult DeleteShipment(int id)
         {
-            // Shipment shipment = db.Shipments.Find(id);
-
-            Shipment dbShipment = db.Shipments.FirstOrDefault(s => s.Subscription.PawzeUser.UserName == User.Identity.Name && s.ShipmentId == id);
-            if (dbShipment == null)
+            Shipment shipment = _shipmentRepository.GetById(id);
+            if (shipment == null)
             {
                 return NotFound();
             }
 
-            db.Shipments.Remove(dbShipment);
-            db.SaveChanges();
+            _shipmentRepository.Delete(shipment);
+            _unitOfWork.Commit();
 
-            return Ok(Mapper.Map<ShipmentsModel>(dbShipment));
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return Ok(Mapper.Map<ShipmentsModel>(shipment));
         }
 
         private bool ShipmentExists(int id)
         {
-            return db.Shipments.Count(e => e.ShipmentId == id) > 0;
+            return _shipmentRepository.Count(e => e.ShipmentId == id) > 0;
         }
     }
 }

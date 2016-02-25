@@ -1,40 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Pawze.API.Domain;
-using Pawze.API.Infrastructure;
+using Pawze.Core.Domain;
+using Pawze.Core.Infrastructure;
+using Pawze.Core.Repository;
+using Pawze.Core.Models;
+using AutoMapper;
 
 namespace Pawze.API.Controllers
 {
     [Authorize]
     public class PawzeConfigurationsController : ApiController
     {
-        private PawzeDataContext db = new PawzeDataContext();
+        //  private PawzeDataContext db = new PawzeDataContext();
+        private IPawzeConfigurationRepository _pawzeConfigurationRepository;
+        private IPawzeUserRepository _userRepository;
+        private IUnitOfWork _unitOfWork;
 
-        // GET: api/Configurations
-        public IQueryable<PawzeConfiguration> GetConfigurations()
+        public PawzeConfigurationsController(IPawzeConfigurationRepository pawzeConfigurationRepository, IUnitOfWork unitOfWork, IPawzeUserRepository userRepository)
         {
-            return db.PawzeConfigurations;
+            _pawzeConfigurationRepository = pawzeConfigurationRepository;
+            _unitOfWork = unitOfWork;
+            _userRepository = userRepository;
         }
 
+        //// GET: api/Configurations
+        //public IEnumerable<PawzeConfiguration> GetConfigurations()
+        //{
+        //    return db.PawzeConfigurations;
+        //}
+
         // GET: api/Configurations/5
-        [ResponseType(typeof(PawzeConfiguration))]
+        [ResponseType(typeof(PawzeConfigurationsModel))]
         public IHttpActionResult GetConfiguration(int id)
         {
-            PawzeConfiguration configuration = db.PawzeConfigurations.Find(id);
-            if (configuration == null)
+            // PawzeConfiguration configuration = db.PawzeConfigurations.Find(id);
+            PawzeConfiguration dbConfiguration = _pawzeConfigurationRepository.GetById(id);
+            if (dbConfiguration == null)
             {
                 return NotFound();
             }
 
-            return Ok(configuration);
+            return Ok(Mapper.Map<PawzeConfigurationsModel>(dbConfiguration));
         }
 
         // PUT: api/Configurations/5
@@ -51,13 +63,13 @@ namespace Pawze.API.Controllers
                 return BadRequest();
             }
 
-            db.Entry(configuration).State = EntityState.Modified;
+            _pawzeConfigurationRepository.Update(configuration);
 
             try
             {
-                db.SaveChanges();
+                _unitOfWork.Commit();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
                 if (!ConfigurationExists(id))
                 {
@@ -81,8 +93,8 @@ namespace Pawze.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.PawzeConfigurations.Add(configuration);
-            db.SaveChanges();
+            _pawzeConfigurationRepository.Add(configuration);
+            _unitOfWork.Commit();
 
             return CreatedAtRoute("DefaultApi", new { id = configuration.PawzeConfigurationId }, configuration);
         }
@@ -91,30 +103,21 @@ namespace Pawze.API.Controllers
         [ResponseType(typeof(PawzeConfiguration))]
         public IHttpActionResult DeleteConfiguration(int id)
         {
-            PawzeConfiguration configuration = db.PawzeConfigurations.Find(id);
+            PawzeConfiguration configuration = _pawzeConfigurationRepository.GetById(id);
             if (configuration == null)
             {
                 return NotFound();
             }
 
-            db.PawzeConfigurations.Remove(configuration);
-            db.SaveChanges();
+            _pawzeConfigurationRepository.Delete(configuration);
+            _unitOfWork.Commit();
 
             return Ok(configuration);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         private bool ConfigurationExists(int id)
         {
-            return db.PawzeConfigurations.Count(e => e.PawzeConfigurationId == id) > 0;
+            return _pawzeConfigurationRepository.Any(e => e.PawzeConfigurationId == id);
         }
     }
 }

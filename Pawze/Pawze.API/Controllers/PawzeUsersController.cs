@@ -1,38 +1,41 @@
-﻿using System;
+﻿using AutoMapper;
+using Pawze.Core.Domain;
+using Pawze.Core.Infrastructure;
+using Pawze.Core.Models;
+using Pawze.Core.Repository;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Pawze.API.Domain;
-using Pawze.API.Infrastructure;
-using AutoMapper;
-using Pawze.API.Models;
 
 namespace Pawze.API.Controllers
 {
     [Authorize]
     public class PawzeUsersController : ApiController
     {
-        private PawzeDataContext db = new PawzeDataContext();
+        private IPawzeUserRepository _pawzeUserRepository;
+        private IUnitOfWork _unitOfWork;
 
-        // GET: api/PawzeUsers
-        public IEnumerable<PawzeUsersModel> GetPawzeUsers()
+        public PawzeUsersController(IPawzeUserRepository pawzeUserRepository, IUnitOfWork unitOfWork)
+        {
+            _pawzeUserRepository = pawzeUserRepository;
+            _unitOfWork = unitOfWork;
+        }
+
+        // GET: api/PawzeUser
+        public IEnumerable<PawzeUsersModel> GetPawzeUser()
         {
             return Mapper.Map<IEnumerable<PawzeUsersModel>>(
-                db.Users
+                _pawzeUserRepository.GetAll()
             );
         }
 
-        // GET: api/PawzeUsers/5
+        // GET: api/PawzeUser/5
         [ResponseType(typeof(PawzeUsersModel))]
-        public IHttpActionResult GetPawzeUser(string id)
+        public IHttpActionResult GetPawzeUser(int id)
         {
-            PawzeUser dbPawzeUser = db.Users.Find(id);
+            PawzeUser dbPawzeUser = _pawzeUserRepository.GetById(id);
 
             if (dbPawzeUser == null)
             {
@@ -42,30 +45,30 @@ namespace Pawze.API.Controllers
             return Ok(Mapper.Map<PawzeUsersModel>(dbPawzeUser));
         }
 
-        // PUT: api/PawzeUsers/5
+        // PUT: api/PawzeUser/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutPawzeUser(string id, PawzeUsersModel pawzeUser)
+        public IHttpActionResult PutPawzeUser(string id, PawzeUsersModel user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != pawzeUser.Id)
+            if (id != user.Id)
             {
                 return BadRequest();
             }
 
-            PawzeUser dbPawzeUser = db.Users.Find(id);
-            dbPawzeUser.Update(pawzeUser);
+            PawzeUser dbPawzeUser = _pawzeUserRepository.GetById(id);
+            dbPawzeUser.Update(user);
 
-            db.Entry(dbPawzeUser).State = EntityState.Modified;
+            _pawzeUserRepository.Update(dbPawzeUser);
 
             try
             {
-                db.SaveChanges();
+                _unitOfWork.Commit();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
                 if (!PawzeUserExists(id))
                 {
@@ -80,9 +83,9 @@ namespace Pawze.API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/PawzeUsers
+        // POST: api/PawzeUser
         [ResponseType(typeof(PawzeUsersModel))]
-        public IHttpActionResult PostPawzeUser(PawzeUsersModel pawzeUser)
+        public IHttpActionResult PostPawzeUser(PawzeUsersModel user)
         {
             if (!ModelState.IsValid)
             {
@@ -90,57 +93,34 @@ namespace Pawze.API.Controllers
             }
 
             var dbPawzeUser = new PawzeUser();
-            db.Users.Add(dbPawzeUser);
+            _pawzeUserRepository.Add(dbPawzeUser);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (PawzeUserExists(pawzeUser.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            _unitOfWork.Commit();
 
-            pawzeUser.Id = dbPawzeUser.Id;
+            user.Id = dbPawzeUser.Id;
 
-            return CreatedAtRoute("DefaultApi", new { id = pawzeUser.Id }, pawzeUser);
+            return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
         }
 
-        // DELETE: api/PawzeUsers/5
+        // DELETE: api/PawzeUser/5
         [ResponseType(typeof(PawzeUsersModel))]
-        public IHttpActionResult DeletePawzeUser(string id)
+        public IHttpActionResult DeletePawzeUser(int id)
         {
-            PawzeUser pawzeUser = db.Users.Find(id);
-            if (pawzeUser == null)
+            PawzeUser user = _pawzeUserRepository.GetById(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            db.Users.Remove(pawzeUser);
-            db.SaveChanges();
+            _pawzeUserRepository.Delete(user);
+            _unitOfWork.Commit();
 
-            return Ok(Mapper.Map<PawzeUsersModel>(pawzeUser));
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return Ok(Mapper.Map<PawzeUsersModel>(user));
         }
 
         private bool PawzeUserExists(string id)
         {
-            return db.Users.Count(e => e.Id == id) > 0;
+            return _pawzeUserRepository.Count(e => e.Id == id) > 0;
         }
     }
 }

@@ -1,31 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Pawze.API.Domain;
+
 using Pawze.API.Infrastructure;
-using Pawze.API.Models;
 using AutoMapper;
+using Pawze.Core.Models;
+using Pawze.Core.Domain;
+using Pawze.Core.Repository;
+using Pawze.Core.Infrastructure;
 
 namespace Pawze.API.Controllers
 {
     [Authorize]
     public class BoxesController : ApiController
     {
-        private PawzeDataContext db = new PawzeDataContext();
+        //private PawzeDataContext db = new PawzeDataContext();
+        private IBoxRepository _boxRepository;
+        private IBoxItemRepository _boxItemRepository;
+        private IPawzeUserRepository _userRepository;
+        private IUnitOfWork _unitOfWork;
+
+        public BoxesController(IBoxRepository boxRepository, IBoxItemRepository boxItemRepository, IUnitOfWork unitOfWork, IPawzeUserRepository userRepository)
+        {
+            _boxRepository = boxRepository;
+            _boxItemRepository = boxItemRepository;
+            _unitOfWork = unitOfWork;
+            _userRepository = userRepository;
+        }
 
         // GET: api/Boxes
         public IEnumerable<BoxesModel> GetBoxes()
         {
             return Mapper.Map<IEnumerable<BoxesModel>>( 
-                db.Boxes.Where(b => b.PawzeUser.UserName == User.Identity.Name)
+                _boxRepository.GetWhere(b => b.PawzeUser.UserName == User.Identity.Name)
             );
+        }
+
+        // GET: /api/Boxes/5/BoxItems
+        [Route("api/boxes/{boxId}/boxitems")]
+        public IEnumerable<BoxItemsModel> GetBoxItemsForBox(int id)
+        {
+            var boxItems = _boxItemRepository.GetWhere(bi => bi.BoxId == id);
+
+            return Mapper.Map<IEnumerable<BoxItemsModel>>(boxItems);
         }
 
         // GET: api/Boxes/5
@@ -33,7 +55,7 @@ namespace Pawze.API.Controllers
         public IHttpActionResult GetBox(int id)
         {
             // Box box = db.Boxes.Find(id);
-            Box dbBox = db.Boxes.FirstOrDefault(b => b.PawzeUser.UserName == User.Identity.Name && b.BoxId == id);
+            Box dbBox = _boxRepository.GetFirstOrDefault(b => b.PawzeUser.UserName == User.Identity.Name && b.BoxId == id);
             if (dbBox == null)
             {
                 return NotFound();
@@ -51,7 +73,7 @@ namespace Pawze.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            Box dbBox = db.Boxes.FirstOrDefault(b => b.PawzeUser.UserName == User.Identity.Name && b.BoxId == id);
+            Box dbBox = _boxRepository.GetFirstOrDefault(b => b.PawzeUser.UserName == User.Identity.Name && b.BoxId == id);
 
             if (id != box.BoxId)
             {
@@ -60,13 +82,13 @@ namespace Pawze.API.Controllers
 
             dbBox.Update(box);
 
-            db.Entry(dbBox).State = EntityState.Modified;
+            _boxRepository.Update(dbBox);
 
             try
             {
-                db.SaveChanges();
+                _unitOfWork.Commit();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
                 if (!BoxExists(id))
                 {
@@ -92,12 +114,13 @@ namespace Pawze.API.Controllers
 
             var dbBox = new Box();
 
-            dbBox.PawzeUser = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+            dbBox.PawzeUser = _userRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name);
 
             dbBox.Update(box);
 
-            db.Boxes.Add(dbBox);
-            db.SaveChanges();
+            _boxRepository.Add(dbBox);
+
+            _unitOfWork.Commit();
 
             box.BoxId = dbBox.BoxId;
 
@@ -109,31 +132,22 @@ namespace Pawze.API.Controllers
         public IHttpActionResult DeleteBox(int id)
         {
             // Box box = db.Boxes.Find(id);
-            Box dbBox = db.Boxes.FirstOrDefault(b => b.PawzeUser.UserName == User.Identity.Name && b.BoxId == id);
+            Box dbBox = _boxRepository.GetFirstOrDefault(b => b.PawzeUser.UserName == User.Identity.Name && b.BoxId == id);
 
             if (dbBox == null)
             {
                 return NotFound();
             }
 
-            db.Boxes.Remove(dbBox);
-            db.SaveChanges();
+            _boxRepository.Delete(dbBox);
+            _unitOfWork.Commit();
 
             return Ok(Mapper.Map<BoxesModel>(dbBox));
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         private bool BoxExists(int id)
         {
-            return db.Boxes.Count(e => e.BoxId == id) > 0;
+            return _boxRepository.Any(e => e.BoxId == id);
         }
     }
 }
