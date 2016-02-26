@@ -127,8 +127,11 @@ namespace Pawze.Test.Controllers
             //BoxesModel box = new BoxesModel();
             box.BoxId = 1;
             box.PawzeUserId = "test1";
+
             IHttpActionResult response = controller.PutBox(box.BoxId, box);
             StatusCodeResult statuscodeResult = response as StatusCodeResult;
+
+
 
             //Assert
             //Assert.IsNotNull(contentResult);
@@ -144,19 +147,21 @@ namespace Pawze.Test.Controllers
         {
 
             //Arrange
-            BoxesModel expected = new BoxesModel { BoxId = 1, PawzeUserId = "test1", SubscriptionId = 1 };
             BoxesModel box = new BoxesModel { BoxId = 1, PawzeUserId = "test1", SubscriptionId = 1 };
 
             //Act
             IHttpActionResult result = controller.PostBox(box);
 
             //Assert
-            OkNegotiatedContentResult<BoxesModel> okResult = (OkNegotiatedContentResult<BoxesModel>)result;
+            CreatedAtRouteNegotiatedContentResult<BoxesModel> okResult = (CreatedAtRouteNegotiatedContentResult<BoxesModel>)result;
 
             var actualBox = okResult.Content;
 
+            _boxRepository.Verify(e => e.)
+
             //Assert
-            Assert.AreSame(expected.BoxId, actualBox.BoxId);
+            BoxesModel expected = new BoxesModel { BoxId = 1, PawzeUserId = "test1", SubscriptionId = 1 };
+            Assert.AreEqual(expected.BoxId, actualBox.BoxId);
         }
     }
 }

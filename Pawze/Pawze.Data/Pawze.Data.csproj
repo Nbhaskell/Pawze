@@ -79,6 +79,8 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Web.config" />
+    <None Include="Web.Debug.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pawze.Core\Pawze.Core.csproj">
