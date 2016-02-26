@@ -1,4 +1,4 @@
-﻿angular.modele('app').factory('AuthenticationService', function ($http, $q, localStorageService, apiUrl) {
+﻿angular.module('app').factory('AuthenticationService', function ($http, $q, localStorageService, apiUrl) {
     var state = {
         authorized: false
     };

@@ -1,11 +1,11 @@
 ﻿angular.module('app', ['ngResource', 'ui.router', 'LocalStorageModule']);
 
-angular.module('app').value('apiUrl', 'http://localhost:53596/api');
+angular.module('app').value('apiUrl', 'http://localhost:55442/api');
 
 angular.module('app').config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
-    $httpProvider.interceptor.push('AuthenticationInterceptor');
+    $httpProvider.interceptors.push('AuthenticationInterceptor');
 
-    $urlRouterProvider.otherwise('home');
+    $urlRouterProvider.otherwise('/home');
 
     $stateProvider
         .state('home', { url: '/home', templateUrl: '/templates/home/home.html', controller: 'HomeController' })
@@ -17,11 +17,11 @@ angular.module('app').config(function ($stateProvider, $urlRouterProvider, $http
 
             .state('app.accountsettings', { url: '/accountsettings', templateUrl: '/templates/app/accountsettings/accountsettings.html', controller: 'AccountSettingsController' })
 
-            .state('app.checkout', { url: '/checkout', templateUrl: '/templates/app/checkout/checkout.html', controller: 'CheckoutController' })
+            .state('app.checkout', { url: '/checkout', templateUrl: '/templates/app/checkout/checkout.html', controller: 'CheckoutController' });
 
-            .state('app.itemselection', { url: '/itemselection', templateUrl: '/templates/app/itemselection/itemselection.html', controller: 'ItemSelectionController' });
+          //  .state('app.itemselection', { url: '/itemselection', templateUrl: '/templates/app/itemselection/itemselection.html', controller: 'ItemSelectionController' });
 });
 
-Angular.Module('app').run(function (AuthenticationService) {
+angular.module('app').run(function (AuthenticationService) {
     AuthenticationService.initialize();
 });
