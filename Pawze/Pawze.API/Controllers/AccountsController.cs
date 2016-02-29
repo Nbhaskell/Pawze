@@ -15,11 +15,6 @@ namespace Pawze.API.Controllers
     {
         private IAuthorizationRepository _repo;
 
-        public AccountsController()
-        {
-
-        }
-
         public AccountsController(IAuthorizationRepository repo)
         {
             _repo = repo;

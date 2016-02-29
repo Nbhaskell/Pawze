@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pawze.Data.Infrastructure
 {
-    public class AuthorizationRepository : IDisposable, IAuthorizationRepository
+    public class AuthorizationRepository : IAuthorizationRepository
     {
         private readonly IUserStore<PawzeUser> _userStore;
         private readonly IDatabaseFactory _databaseFactory;
@@ -79,10 +79,5 @@ namespace Pawze.Data.Infrastructure
             return await _userManager.FindAsync(username, password);
         }
 
-
-        public void Dispose()
-        {
-            _userManager.Dispose();
-        }
     }
 }
