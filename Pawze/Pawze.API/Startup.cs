@@ -45,7 +45,7 @@ namespace Pawze.API
             Func<IAuthorizationRepository> authRepositoryFactory = container.GetInstance<IAuthorizationRepository>;
 
             var authenticationOptions = new OAuthBearerAuthenticationOptions();
-            app.UseOAuthBearerAuthentication(authenticationOptions);
+           
 
             var authorizationOptions = new OAuthAuthorizationServerOptions
             {
@@ -56,6 +56,7 @@ namespace Pawze.API
             };
 
             app.UseOAuthAuthorizationServer(authorizationOptions);
+            app.UseOAuthBearerAuthentication(authenticationOptions);
         }
 
         public Container ConfigureSimpleInjector(IAppBuilder app)

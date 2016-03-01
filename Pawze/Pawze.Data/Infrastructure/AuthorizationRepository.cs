@@ -27,7 +27,7 @@ namespace Pawze.Data.Infrastructure
             // create a user
             var pawzeUser = new PawzeUser
             {
-                UserName = model.Username,
+                UserName = model.EmailAddress,
                 Email = model.EmailAddress
             };
 
@@ -45,7 +45,7 @@ namespace Pawze.Data.Infrastructure
             // create a user
             var pawzeUser = new PawzeUser
             {
-                UserName = model.Username,
+                UserName = model.EmailAddress,
                 Email = model.EmailAddress
             };
 
@@ -62,7 +62,7 @@ namespace Pawze.Data.Infrastructure
             // create a user
             var pawzeUser = new PawzeUser
             {
-                UserName = model.Username,
+                UserName = model.EmailAddress,
                 Email = model.EmailAddress
             };
 
