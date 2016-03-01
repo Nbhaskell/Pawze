@@ -116,3 +116,4 @@ C:\Dev\GitHub\Pawze\Pawze\Pawze.Test\bin\Debug\EntityFramework.xml
 C:\Dev\GitHub\Pawze\Pawze\Pawze.Test\obj\Debug\Pawze.Test.csprojResolveAssemblyReference.cache
 C:\Dev\GitHub\Pawze\Pawze\Pawze.Test\obj\Debug\Pawze.Test.dll
 C:\Dev\GitHub\Pawze\Pawze\Pawze.Test\obj\Debug\Pawze.Test.pdb
+C:\dev\github\Pawze\Pawze\Pawze.Test\bin\Debug\ja\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
