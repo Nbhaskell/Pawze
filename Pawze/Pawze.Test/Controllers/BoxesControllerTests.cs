@@ -157,7 +157,8 @@ namespace Pawze.Test.Controllers
 
             var actualBox = okResult.Content;
 
-            _boxRepository.Verify(e => e.)
+            // TODO: Cameron's last thought on testing
+            // _boxRepository.Verify(e => e.)
 
             //Assert
             BoxesModel expected = new BoxesModel { BoxId = 1, PawzeUserId = "test1", SubscriptionId = 1 };
