@@ -2,7 +2,7 @@
     $scope.registration = {};
 
     $scope.register = function () {
-        AuthenticationService.register($scope.registration).then(
+        AuthenticationService.registerCustomer($scope.registration).then(
             function (response) {
                 alert("Registration Complete");
                 $timeout(function () {
@@ -12,6 +12,6 @@
             function (error) {
                 alert("Failed To Register");
             }
-            )
+        );
     };
 });

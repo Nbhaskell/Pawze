@@ -12,14 +12,29 @@
         var user = localStorageService.get('user');
     }
 
-    function register(registration) {
-        // this wil call /api/accounts/register
-        return $http.post(apiUrl + '/accounts/register', registration).then(
+    function registerStaff(registration) {
+        return $http.post(apiUrl + '/accounts/register/staff', registration).then(
             function (response) {
                 return response;
             }
         );
     }
+    function registerCustomer(registration) {
+        return $http.post(apiUrl + '/accounts/register/customers', registration).then(
+            function (response) {
+                return response;
+            }
+        );
+    }
+    function registerAdmin(registration) {
+        // this wil call /api/accounts/register
+        return $http.post(apiUrl + '/accounts/register/admin', registration).then(
+            function (response) {
+                return response;
+            }
+        );
+    }
+    
 
     // loginData is a JS object that contains username and password from the login form
     function login(loginData) {
@@ -60,7 +75,9 @@
     return {
         state: state,
         initialize: initialize,
-        register: register,
+        registerCustomer: registerCustomer,
+        registerAdmin: registerAdmin,
+        registerStaff: registerStaff,
         login: login,
         logout: logout
     };
