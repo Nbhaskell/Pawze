@@ -21,7 +21,6 @@ namespace Pawze.Core.Domain
         public void Update(PawzeUsersModel pawzeUser)
         {
             UserName = pawzeUser.UserName;
-            StripeId = pawzeUser.StripeId;
             FirstName = pawzeUser.FirstName;
             LastName = pawzeUser.LastName;
             Address1 = pawzeUser.Address1;
@@ -35,13 +34,14 @@ namespace Pawze.Core.Domain
             International = pawzeUser.International;
             PhoneNumber = pawzeUser.PhoneNumber;
             Email = pawzeUser.Email;
+            StripeCustomerId = pawzeUser.StripeCustomerId;
         }
 
         public string Id { get; set; }
         public string UserName { get; set; }
         public string PasswordHash { get; set; }
         public string SecurityStamp { get; set; }
-        public string StripeId { get; set; }
+        public string StripeCustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address1 { get; set; }

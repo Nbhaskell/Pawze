@@ -1,10 +1,35 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
-</head>
-<body>
-    <a href="#/login">Register</a>
-</body>
-</html>
+﻿
+    <title>Registration</title>
+<div id="wrapper">
+    <div id="form">
+        <h1>Registration</h1>
+        <fielset id="signup">
+            <div class="input-box">
+                <label for="name" class="fill_">First Name</label>
+                <input type="text" name="name" ng-model="registration.FirstName">
+            </div>
+            <div class="input-box">
+                <label for="name" class="fill_">Last Name</label>
+                <input type="text" name="name" ng-model="registration.LastName">
+            </div>
+            <div class="input-box">
+                <label for="email" class="fill_">Email</label>
+                <input type="email" name="email" ng-model="registration.EmailAddress">
+            </div>
+            <div class="input-box">
+                <label for="password" class="fill_">Password</label>
+                <input type="password" name="password" ng-model="registration.Password">
+            </div>
+            <div class="input-box">
+                <label for="again" class="fill_">Confirm Password</label>
+                <input type="password" name="again" ng-model="registration.ConfirmPassword">
+            </div>
+            <a href="#/login" class="fill_ button" ng-click="register()">Register</a>
+        </fielset>
+       </div> 
+    </div>
+    
+
+    
+<pre>{{registration | json}}</pre>
+

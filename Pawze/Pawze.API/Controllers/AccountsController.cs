@@ -15,11 +15,6 @@ namespace Pawze.API.Controllers
     {
         private IAuthorizationRepository _repo;
 
-        public AccountsController()
-        {
-
-        }
-
         public AccountsController(IAuthorizationRepository repo)
         {
             _repo = repo;
@@ -47,7 +42,7 @@ namespace Pawze.API.Controllers
         }
 
         [AllowAnonymous]
-        //[Authorize(Roles = "Admin")]
+        //  [Authorize(Roles = "Admin")]
         [Route("api/accounts/register/admin")]
         public async Task<IHttpActionResult> RegisterAdmin(RegistrationModel registration)
         {

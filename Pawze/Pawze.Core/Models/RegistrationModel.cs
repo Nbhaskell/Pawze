@@ -9,7 +9,10 @@ namespace Pawze.Core.Models
     public class RegistrationModel
     {
         [Required]
-        public string Username { get; set; }
+        public string FirstName { get; set; }
+
+        [Required]
+        public string LastName { get; set; }
 
         [Required]
         public string EmailAddress { get; set; }

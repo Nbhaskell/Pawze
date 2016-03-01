@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 namespace Pawze.Data.Infrastructure
 {
     public class UserStore : Disposable,
+                             IUserStore<PawzeUser>,
                              IUserPasswordStore<PawzeUser>,
                              IUserSecurityStampStore<PawzeUser>,
                              IUserRoleStore<PawzeUser>
@@ -38,6 +39,7 @@ namespace Pawze.Data.Infrastructure
                 throw new ArgumentNullException(nameof(user));
 
             return Task.Factory.StartNew(() => {
+                user.Id = Guid.NewGuid().ToString();
                 Db.Users.Add(user);
                 Db.SaveChanges();
             });
@@ -145,14 +147,16 @@ namespace Pawze.Data.Infrastructure
                 {
                     Db.Roles.Add(new Role
                     {
+                        Id = Guid.NewGuid().ToString(),
                         Name = roleName
                     });
+                    Db.SaveChanges();
                 }
 
                 Db.UserRoles.Add(new UserRole
                 {
-                    Role = Db.Roles.FirstOrDefault(r => r.Name == roleName),
-                    User = user
+                    RoleId = Db.Roles.FirstOrDefault(r => r.Name == roleName).Id,
+                    UserId = user.Id
                 });
 
                 Db.SaveChanges();

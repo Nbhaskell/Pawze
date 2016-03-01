@@ -1,10 +1,13 @@
-﻿using Microsoft.Owin;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Pawze.API.Infrastructure;
+using Pawze.Core.Domain;
 using Pawze.Core.Infrastructure;
 using Pawze.Core.Repository;
+using Pawze.Core.Services.Finance;
 using Pawze.Data.Infrastructure;
 using Pawze.Data.Repository;
 using SimpleInjector;
@@ -43,7 +46,7 @@ namespace Pawze.API
             Func<IAuthorizationRepository> authRepositoryFactory = container.GetInstance<IAuthorizationRepository>;
 
             var authenticationOptions = new OAuthBearerAuthenticationOptions();
-            app.UseOAuthBearerAuthentication(authenticationOptions);
+           
 
             var authorizationOptions = new OAuthAuthorizationServerOptions
             {
@@ -54,6 +57,7 @@ namespace Pawze.API
             };
 
             app.UseOAuthAuthorizationServer(authorizationOptions);
+            app.UseOAuthBearerAuthentication(authenticationOptions);
         }
 
         public Container ConfigureSimpleInjector(IAppBuilder app)
@@ -65,6 +69,7 @@ namespace Pawze.API
             // Infrastructure
             container.Register<IDatabaseFactory, DatabaseFactory>(Lifestyle.Scoped);
             container.Register<IUnitOfWork, UnitOfWork>();
+            container.Register<IUserStore<PawzeUser>, UserStore>(Lifestyle.Scoped);
 
             // Repositories
             container.Register<IBoxItemRepository, BoxItemRepository>();
@@ -76,6 +81,10 @@ namespace Pawze.API
             container.Register<IShipmentRepository, ShipmentRepository>();
             container.Register<ISubscriptionRepository, SubscriptionRepository>();
             container.Register<IUserRoleRepository, UserRoleRepository>();
+            container.Register<IAuthorizationRepository, AuthorizationRepository>(Lifestyle.Scoped);
+
+            // Services
+            container.Register<ISubscriptionService, StripeSubscriptionService>();
 
             app.Use(async (context, next) =>
             {

@@ -24,6 +24,7 @@ namespace Pawze.API.Controllers
         }
 
         // GET: api/Inventories
+        [AllowAnonymous]
         public IEnumerable<InventoriesModel> GetInventories()
         {
             return Mapper.Map<IEnumerable<InventoriesModel>>(
@@ -32,6 +33,7 @@ namespace Pawze.API.Controllers
         }
 
         // GET: api/Inventories/5
+        [AllowAnonymous]
         [ResponseType(typeof(InventoriesModel))]
         public IHttpActionResult GetInventory(int id)
         {

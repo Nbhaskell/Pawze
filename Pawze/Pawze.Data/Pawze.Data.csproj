@@ -42,6 +42,14 @@
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stripe.net, Version=5.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.5.3.0\lib\Stripe.net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -63,6 +71,14 @@
     <Compile Include="Migrations\201602250032004_InitialCreate.cs" />
     <Compile Include="Migrations\201602250032004_InitialCreate.Designer.cs">
       <DependentUpon>201602250032004_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603011807326_implementing stripe.cs" />
+    <Compile Include="Migrations\201603011807326_implementing stripe.Designer.cs">
+      <DependentUpon>201603011807326_implementing stripe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603011808513_removed boxId from subscription domain and model.cs" />
+    <Compile Include="Migrations\201603011808513_removed boxId from subscription domain and model.Designer.cs">
+      <DependentUpon>201603011808513_removed boxId from subscription domain and model.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,6 +107,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201602250032004_InitialCreate.resx">
       <DependentUpon>201602250032004_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603011807326_implementing stripe.resx">
+      <DependentUpon>201603011807326_implementing stripe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603011808513_removed boxId from subscription domain and model.resx">
+      <DependentUpon>201603011808513_removed boxId from subscription domain and model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
