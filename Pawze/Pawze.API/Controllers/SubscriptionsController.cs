@@ -3,6 +3,7 @@ using Pawze.Core.Domain;
 using Pawze.Core.Infrastructure;
 using Pawze.Core.Models;
 using Pawze.Core.Repository;
+using Pawze.Core.Services.Finance;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -14,13 +15,19 @@ namespace Pawze.API.Controllers
     [Authorize]
     public class SubscriptionsController : ApiController
     {
+        private ISubscriptionService _subscriptionService;
         private ISubscriptionRepository _subscriptionRepository;
+        private IBoxRepository _boxRepository;
+        private IPawzeUserRepository _pawzeUserRepository;
         private IUnitOfWork _unitOfWork;
 
-        public SubscriptionsController(ISubscriptionRepository subscriptionRepository, IUnitOfWork unitOfWork)
+        public SubscriptionsController(ISubscriptionRepository subscriptionRepository, IUnitOfWork unitOfWork, ISubscriptionService subscriptionService, IPawzeUserRepository pawzeUserRepository, IBoxRepository boxRepository)
         {
+            _subscriptionService = subscriptionService;
             _subscriptionRepository = subscriptionRepository;
+            _boxRepository = boxRepository;
             _unitOfWork = unitOfWork;
+            _pawzeUserRepository = pawzeUserRepository;
         }
 
         // GET: api/Subscriptions
@@ -102,6 +109,38 @@ namespace Pawze.API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = subscription.SubscriptionId }, subscription);
         }
 
+        [AllowAnonymous] //TODO: DUDE!!!!!! REMOVE THIS!!!!!
+        [HttpPost]
+        [Route("api/subscriptions/create")]
+        public IHttpActionResult CreateSubscription(StripePaymentParams payment)
+        {
+            _subscriptionService.Create(
+                //_pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name),
+                _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner"), //TODO: AND THIS!!!!!!!
+                _boxRepository.GetById(payment.boxId),
+                payment.stripeToken
+            );
+
+            return Ok();
+        }
+
+        [AllowAnonymous] //TODO: DUDE!!!!!! REMOVE THIS!!!!!
+        [HttpPost]
+        [Route("api/subscriptions/cancel")]
+        public IHttpActionResult CancelSubscription(StripePaymentParams payment)
+        {
+            //var user = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name);
+            var user = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner");//// AND THIS!!!!
+
+            _subscriptionService.Cancel(
+                //_pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name),
+                _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner"), //TODO: AND THIS!!!!!!!
+                _subscriptionRepository.GetFirstOrDefault(u => u.PawzeUserId == user.Id)
+            );
+
+            return Ok();
+        }
+
         // DELETE: api/Subscriptions/5
         [ResponseType(typeof(SubscriptionsModel))]
         public IHttpActionResult DeleteSubscription(int id)
@@ -121,6 +160,12 @@ namespace Pawze.API.Controllers
         private bool SubscriptionExists(int id)
         {
             return _subscriptionRepository.Count(e => e.SubscriptionId == id) > 0;
+        }
+
+        public class StripePaymentParams
+        {
+            public string stripeToken { get; set; }
+            public int boxId { get; set; }
         }
     }
 }

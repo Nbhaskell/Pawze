@@ -7,6 +7,7 @@ using Pawze.API.Infrastructure;
 using Pawze.Core.Domain;
 using Pawze.Core.Infrastructure;
 using Pawze.Core.Repository;
+using Pawze.Core.Services.Finance;
 using Pawze.Data.Infrastructure;
 using Pawze.Data.Repository;
 using SimpleInjector;
@@ -80,7 +81,10 @@ namespace Pawze.API
             container.Register<IShipmentRepository, ShipmentRepository>();
             container.Register<ISubscriptionRepository, SubscriptionRepository>();
             container.Register<IUserRoleRepository, UserRoleRepository>();
-            container.Register<IAuthorizationRepository, AuthorizationRepository>();
+            container.Register<IAuthorizationRepository, AuthorizationRepository>(Lifestyle.Scoped);
+
+            // Services
+            container.Register<ISubscriptionService, StripeSubscriptionService>();
 
             app.Use(async (context, next) =>
             {

@@ -22,15 +22,13 @@ namespace Pawze.Core.Domain
             SubscriptionId = subscription.SubscriptionId;
             StartDate = subscription.StartDate;
             PawzeUserId = subscription.PawzeUserId;
-            BoxId = subscription.BoxId;
-            ActiveSubscription = subscription.ActiveSubscription;
+            StripeSubscriptionId = subscription.StripeSubscriptionId;
         }
 
         public int SubscriptionId { get; set; }
         public DateTime StartDate { get; set; }
         public string PawzeUserId{ get; set; }
-        public string BoxId { get; set; }
-        public bool ActiveSubscription { get; set; }
+        public string StripeSubscriptionId { get; set; }
 
         public virtual ICollection<Shipment> Shipments { get; set; }
         public virtual ICollection<Box> Boxes { get; set; }
