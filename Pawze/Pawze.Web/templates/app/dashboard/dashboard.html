@@ -1,11 +1,16 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
-</head>
-<body>
-    <a href="#/app/accountsettings">Go to your account settings</a>
-    <a href="#/app/checkout">Checkout</a>
-</body>
-</html>
+﻿<a href="#/app/accountsettings">Go to your account settings</a>
+<a href="#/app/checkout">Checkout</a>
+
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="min-width:auto; width:100%;">
+        {{inventory.Name}}
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="inventory in inventories"><a ng-click="inventorySelect(inventory)">{{inventory.Name}}</a></li>
+    </ul>
+
+    
+</div>
+
+<pre>{{ boxItem1 | json }}</pre>
