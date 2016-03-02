@@ -11,5 +11,7 @@ namespace Pawze.Core.Models
         public int BoxId { get; set; }
         public int InventoryId { get; set; }
         public decimal BoxItemPrice { get; set; }
+
+        public InventoriesModel Inventory { get; set; }
     }
 }

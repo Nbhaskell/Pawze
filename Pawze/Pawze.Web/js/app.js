@@ -17,9 +17,9 @@ angular.module('app').config(function ($stateProvider, $urlRouterProvider, $http
 
             .state('app.accountsettings', { url: '/accountsettings', templateUrl: '/templates/app/accountsettings/accountsettings.html', controller: 'AccountSettingsController' })
 
-            .state('app.checkout', { url: '/checkout', templateUrl: '/templates/app/checkout/checkout.html', controller: 'CheckoutController' });
+            .state('app.confirmation', { url: '/confirmation', templateUrl: '/templates/app/confirmation/confirmation.html', controller: 'ConfirmationController' })
 
-          //  .state('app.itemselection', { url: '/itemselection', templateUrl: '/templates/app/itemselection/itemselection.html', controller: 'ItemSelectionController' });
+            .state('app.summary', { url: '/summary', templateUrl: '/templates/app/summary/summary.html', controller: 'SummaryController' });
 });
 
 angular.module('app').run(function (AuthenticationService) {

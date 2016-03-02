@@ -34,7 +34,7 @@ namespace Pawze.API.Controllers
         public IEnumerable<SubscriptionsModel> GetSubscriptions()
         {
             return Mapper.Map<IEnumerable<SubscriptionsModel>>(
-                _subscriptionRepository.GetAll()
+                _subscriptionRepository.GetWhere(m => m.PawzeUser.UserName == User.Identity.Name)
             );
         }
 
@@ -100,23 +100,27 @@ namespace Pawze.API.Controllers
             }
 
             var dbSubscription = new Subscription();
+
+            dbSubscription.StartDate = DateTime.Now;
+            dbSubscription.PawzeUser = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name);
             _subscriptionRepository.Add(dbSubscription);
 
             _unitOfWork.Commit();
 
             subscription.SubscriptionId = dbSubscription.SubscriptionId;
+            
 
             return CreatedAtRoute("DefaultApi", new { id = subscription.SubscriptionId }, subscription);
         }
 
-        [AllowAnonymous] //TODO: DUDE!!!!!! REMOVE THIS!!!!!
+        //[AllowAnonymous] //TODO: DUDE!!!!!! REMOVE THIS!!!!!
         [HttpPost]
         [Route("api/subscriptions/create")]
         public IHttpActionResult CreateSubscription(StripePaymentParams payment)
         {
             _subscriptionService.Create(
-                //_pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name),
-                _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner"), //TODO: AND THIS!!!!!!!
+                _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name),
+               /* _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner"), //TODO: AND THIS!!!*/
                 _boxRepository.GetById(payment.boxId),
                 payment.stripeToken
             );
@@ -124,17 +128,17 @@ namespace Pawze.API.Controllers
             return Ok();
         }
 
-        [AllowAnonymous] //TODO: DUDE!!!!!! REMOVE THIS!!!!!
+        //[AllowAnonymous] //TODO: DUDE!!!!!! REMOVE THIS!!!!!
         [HttpPost]
         [Route("api/subscriptions/cancel")]
         public IHttpActionResult CancelSubscription(StripePaymentParams payment)
         {
-            //var user = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name);
-            var user = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner");//// AND THIS!!!!
+            var user = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name);
+            //var user = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner");//// AND THIS!!!!
 
             _subscriptionService.Cancel(
-                //_pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name),
-                _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner"), //TODO: AND THIS!!!!!!!
+                _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name),
+                //_pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner"), //TODO: AND THIS!!!!!!!
                 _subscriptionRepository.GetFirstOrDefault(u => u.PawzeUserId == user.Id)
             );
 
