@@ -168,24 +168,24 @@ http://www.tooplate.com/view/2076-zentro
 }
 
 /* what is pawze section */
-#homepageContainer #what {
+#homepageContainer #treats {
   text-align: center;
 }
-#homepageContainer #what h3 {
+#homepageContainer #treats h3 {
   font-size: 18px;
   line-height: 4px;
 }
-#homepageContainer #what h4 {
+#homepageContainer #treats h4 {
   color: #5C5C5C;
   padding-top: 24px;
 }
-#homepageContainer #what p {
+#homepageContainer #treats p {
     color: black;
 }
-#homepageContainer #what .col-md-4 {
+#homepageContainer #treats .col-md-4 {
  padding-top: 42px;
 }
-#homepageContainer #what img {
+#homepageContainer #treats img {
     width: 350px; 
     height: 300px;
 }
