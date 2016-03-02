@@ -11,9 +11,12 @@ namespace Pawze.Data.Infrastructure
     {
         public PawzeDataContext() : base("Pawze")
         {
+<<<<<<< HEAD
             // ROLA - This is a hack to ensure that Entity Framework SQL Provider is copied across to the output folder.
             // As it is installed in the GAC, Copy Local does not work. It is required for probing.
             // Fixed "Provider not loaded" error
+=======
+>>>>>>> 2b81fee5f9bb1b4ef2d4c380a6152ec3d91ddf0f
             var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
         public IDbSet<Box> Boxes { get; set; }
