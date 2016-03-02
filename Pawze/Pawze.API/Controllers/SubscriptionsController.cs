@@ -34,7 +34,7 @@ namespace Pawze.API.Controllers
         public IEnumerable<SubscriptionsModel> GetSubscriptions()
         {
             return Mapper.Map<IEnumerable<SubscriptionsModel>>(
-                _subscriptionRepository.GetAll()
+                _subscriptionRepository.GetWhere(m => m.PawzeUser.UserName == User.Identity.Name)
             );
         }
 
@@ -100,6 +100,9 @@ namespace Pawze.API.Controllers
             }
 
             var dbSubscription = new Subscription();
+
+            dbSubscription.StartDate = DateTime.Now;
+            dbSubscription.PawzeUser = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name);
             _subscriptionRepository.Add(dbSubscription);
 
             _unitOfWork.Commit();

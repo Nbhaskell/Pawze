@@ -1,16 +1,60 @@
 ﻿<a href="#/app/accountsettings">Go to your account settings</a>
 <a href="#/app/checkout">Checkout</a>
 
+<div class="dropdown" ng-repeat="boxItem in box.BoxItems">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="min-width:auto; width:100%;">
+        {{boxItem.Inventory.Name}}
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="inventory in inventories"><a ng-click="selectInventory(inventory, boxItem)">{{inventory.Name}}</a></li>
+    </ul>  
+</div>
+
+<!--<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="min-width:auto; width:100%;">
+        {{inventory.Name}}
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="inventory in inventories"><a ng-click="inventorySelectBoxItem1(inventory)">{{inventory.Name}}</a></li>
+    </ul>  
+</div>
 <div class="dropdown">
     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="min-width:auto; width:100%;">
         {{inventory.Name}}
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li ng-repeat="inventory in inventories"><a ng-click="inventorySelect(inventory)">{{inventory.Name}}</a></li>
+        <li ng-repeat="inventory in inventories"><a ng-click="inventorySelectBoxItem2(inventory)">{{inventory.Name}}</a></li>
     </ul>
+</div>
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="min-width:auto; width:100%;">
+        {{inventory.Name}}
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="inventory in inventories"><a ng-click="inventorySelectBoxItem3(inventory)">{{inventory.Name}}</a></li>
+    </ul>
+</div>
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="min-width:auto; width:100%;">
+        {{inventory.Name}}
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="inventory in inventories"><a ng-click="inventorySelectBoxItem4(inventory)">{{inventory.Name}}</a></li>
+    </ul>
+</div>-->
 
-    
+<div>
+    <button class="btn btn-default" type="button" ng-click="save()">Save</button>
 </div>
 
-<pre>{{ boxItem1 | json }}</pre>
+<pre>{{box | json}}</pre>
+<!--<pre>{{ boxItem1 | json }}</pre>
+<pre>{{ boxItem2 | json }}</pre>
+<pre>{{ boxItem3 | json }}</pre>
+<pre>{{ boxItem4 | json }}</pre>
+<pre>{{ sub | json }}</pre>-->
