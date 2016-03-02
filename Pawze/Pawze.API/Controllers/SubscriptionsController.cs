@@ -108,18 +108,19 @@ namespace Pawze.API.Controllers
             _unitOfWork.Commit();
 
             subscription.SubscriptionId = dbSubscription.SubscriptionId;
+            
 
             return CreatedAtRoute("DefaultApi", new { id = subscription.SubscriptionId }, subscription);
         }
 
-        [AllowAnonymous] //TODO: DUDE!!!!!! REMOVE THIS!!!!!
+        //[AllowAnonymous] //TODO: DUDE!!!!!! REMOVE THIS!!!!!
         [HttpPost]
         [Route("api/subscriptions/create")]
         public IHttpActionResult CreateSubscription(StripePaymentParams payment)
         {
             _subscriptionService.Create(
-                //_pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name),
-                _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner"), //TODO: AND THIS!!!!!!!
+                _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name),
+               /* _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner"), //TODO: AND THIS!!!*/
                 _boxRepository.GetById(payment.boxId),
                 payment.stripeToken
             );
@@ -127,17 +128,17 @@ namespace Pawze.API.Controllers
             return Ok();
         }
 
-        [AllowAnonymous] //TODO: DUDE!!!!!! REMOVE THIS!!!!!
+        //[AllowAnonymous] //TODO: DUDE!!!!!! REMOVE THIS!!!!!
         [HttpPost]
         [Route("api/subscriptions/cancel")]
         public IHttpActionResult CancelSubscription(StripePaymentParams payment)
         {
-            //var user = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name);
-            var user = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner");//// AND THIS!!!!
+            var user = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name);
+            //var user = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner");//// AND THIS!!!!
 
             _subscriptionService.Cancel(
-                //_pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name),
-                _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner"), //TODO: AND THIS!!!!!!!
+                _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name),
+                //_pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner"), //TODO: AND THIS!!!!!!!
                 _subscriptionRepository.GetFirstOrDefault(u => u.PawzeUserId == user.Id)
             );
 

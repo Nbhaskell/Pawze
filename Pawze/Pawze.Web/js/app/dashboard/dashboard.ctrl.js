@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('DashboardController', function ($scope, BoxResource, BoxItemResource, InventoryResource, SubscriptionResource, apiUrl, $http) {
+﻿angular.module('app').controller('DashboardController', function ($scope, BoxResource, BoxItemResource, InventoryResource, SubscriptionResource, apiUrl, $http, $state) {
 
     function activate() {
         $http.get(apiUrl + '/boxes/user')
@@ -8,11 +8,11 @@
              .catch(function (err) {
                  alert('Failed to get the box');
              });
+    $scope.inventories = InventoryResource.query();
     }
 
     activate();
 
-    $scope.inventories = InventoryResource.query();
 
     $scope.selectInventory = function (inventory, boxItem) {
         boxItem.InventoryId = inventory.InventoryId;
@@ -23,15 +23,18 @@
         if ($scope.box.BoxId === 0) {
             BoxResource.save($scope.box, function (newBox) {
                 alert('Saved box, box id is now ' + newBox.BoxId);
-            });
+                $state.go('app.summary');
+            }); 
         } else {
             $http.put(apiUrl + '/boxes/' + $scope.box.BoxId, $scope.box)
                  .then(function () {
                      alert('Updated box successfully');
+                     $state.go('app.confirmation');
                  })
                  .catch(function (err) {
                      alert('Couldn\'t update the box');
-                 });
+                 })
+            ;
         }
     };
 
