@@ -6,7 +6,7 @@ http://www.tooplate.com/view/2076-zentro
 
 */
 
-body
+#homepageContainer
 	{
 		background: #ffffff;
     font-family: 'Roboto', sans-serif;
@@ -14,17 +14,17 @@ body
     position: relative;
 	}
 
-.heading {
+#homepageContainer .heading {
   font-size: 22px;
   font-weight: 500;
 }
 
-.subheading {
+#homepageContainer .subheading {
   font-size: 16px;
   padding-bottom: 60px;
 }
 
-p {
+#homepageContainer p {
   color: #848484;
   font-weight: 400;
   font-size: 16px;
@@ -32,26 +32,26 @@ p {
   line-height: 28px;
 }
 
-hr {
+#homepageContainer hr {
 	border-top: 2px solid #828282;
 	width: 120px;
 }
 
-#menu, #gallery, #team {
+#homepageContainer #menu, #gallery, #team {
 	padding-top: 100px;
 	padding-bottom: 100px;
 }
-#menu, #contact {
+#homepageContainer #menu, #contact {
   background: #f0f0f0;
 }
 
-.parallax-section {
+#homepageContainer .parallax-section {
   background-attachment: fixed !important;
   background-size: cover !important;
 }
 
 /* preloader section */
-.preloader  {
+#homepageContainer .preloader  {
         position: fixed;
         top: 0;
         left: 0;
@@ -72,7 +72,7 @@ hr {
                 align-items: center;
         background: none repeat scroll 0 0 #fff;
     }
-.sk-spinner-pulse {
+#homepageContainer .sk-spinner-pulse {
   width: 40px;
   height: 40px;
   background-color: #F6D76B;
@@ -100,28 +100,28 @@ hr {
 
 
 /* start navigation */
-.navbar-default {
+#homepageContainer .navbar-default {
   background: #ffffff;
   box-shadow: 0px 2px 8px 0px rgba(50, 50, 50, 0.04);
   border: none;
   margin-bottom: 0;
 }
-.navbar-brand, .navbar-nav li a {
+#homepageContainer .navbar-brand, .navbar-nav li a {
   line-height: 28px;
 }
-.navbar-default .navbar-brand  {
+#homepageContainer .navbar-default .navbar-brand  {
   color: #5C5C5C;
   font-size: 22px;
   font-weight: bold;
   letter-spacing: 2px;
 }
-.navbar-default .navbar-nav li a {
+#homepageContainer .navbar-default .navbar-nav li a {
   font-size: 12px;
   letter-spacing: 1px;
 }
 
 /* home section */
-#home {
+#homepageContainer #home {
   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1) ), 
               url('../images/../images/DogWithTreat.jpg') 50% 0 repeat-y fixed;
   -webkit-background-size: cover;
@@ -139,18 +139,18 @@ hr {
   height: 100vh;
   text-align: center;
 }
-#home h1 {
+#homepageContainer #home h1 {
   font-size: 20px;
   letter-spacing: 8px;
   font-style: normal;
   padding-top: 10px;
 }
 
-#home h2 {
+#homepageContainer #home h2 {
     color: white;
 }
 
-#home .btn {
+#homepageContainer #home .btn {
   background: transparent;
   border-radius: 0;
   border: 3px solid #ffffff;
@@ -161,61 +161,61 @@ hr {
   margin-top: 40px;
   transition: all 0.4s ease-in-out;
 }
-#home .btn:hover {
+#homepageContainer #home .btn:hover {
   background: #ffffff;
   color: #202020;
 }
 
 /* what is pawze section */
-#what {
+#homepageContainer #what {
   text-align: center;
 }
-#what h3 {
+#homepageContainer #what h3 {
   font-size: 18px;
   line-height: 4px;
 }
-#what h4 {
+#homepageContainer #what h4 {
   color: #5C5C5C;
   padding-top: 24px;
 }
-#what p {
+#homepageContainer #what p {
     color: black;
 }
-#what .col-md-4 {
+#homepageContainer #what .col-md-4 {
  padding-top: 42px;
 }
-#what img {
+#homepageContainer #what img {
     width: 350px; 
     height: 300px;
 }
 
 /* how does it work section */
-#how h4 {
+#homepageContainer #how h4 {
 	line-height: 1.5;
 }
-#how .col-md-8 {
+#homepageContainer #how .col-md-8 {
   padding-bottom: 42px;
 }
-#how .col-md-6 {
+#homepageContainer #how .col-md-6 {
   padding-bottom: 18px;
 }
-#how span {
+#homepageContainer #how span {
   color: #5C5C5C;
 }
 
 /* make a box section */
-#box {
+#homepageContainer #box {
   padding-top: 80px;
   padding-bottom: 80px;
 }
-#box .col-md-4 {
+#homepageContainer #box .col-md-4 {
   padding-top: 52px;
 }
-#box img {
+#homepageContainer #box img {
   width: 100%;
   padding-bottom: 18px;
 }
-#box .col-md-4 div {
+#homepageContainer #box .col-md-4 div {
   position: relative;
   bottom: 18px;
   padding-bottom: 12px;
@@ -230,14 +230,14 @@ hr {
 }*/
 
 /* contact section */
-#contact {
+#homepageContainer #contact {
   padding-top: 80px;
   padding-bottom: 100px;
 }
-#contact .col-md-8 {
+#homepageContainer #contact .col-md-8 {
   margin-bottom: 32px;
 }
-#contact .form-control {
+#homepageContainer #contact .form-control {
   background: #ffffff;
   border: none;
   border-radius: 0;
@@ -246,13 +246,13 @@ hr {
   margin-bottom: 10px;
   transition: all 0.4s ease-in-out;
 }
-#contact .form-control:focus {
+#homepageContainer #contact .form-control:focus {
   border-color: #f9f9f9;
 }
-#contact input {
+#homepageContainer #contact input {
   height: 48px;
 }
-#contact input[type="submit"] {
+#homepageContainer #contact input[type="submit"] {
   background: transparent;
   border: 2px solid #999;
   border-radius: 10px;
@@ -260,13 +260,13 @@ hr {
   margin-top: 12px;
   height: 50px;
 }
-#contact input[type="submit"]:hover {
+#homepageContainer #contact input[type="submit"]:hover {
   background: #999;
   color: #ffffff;
 }
 
 /* footer section */
-footer {
+#homepageContainer footer {
   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1) ),
               url('../images/../images/DoggieTreatBags.jpg') 50% 0 repeat-y fixed;
   -webkit-background-size: cover;
@@ -276,38 +276,38 @@ footer {
   padding-top: 80px;
   padding-bottom: 80px;
 }
-footer h2 {
+#homepageContainer footer h2 {
   padding-bottom: 14px;
 }
-footer h3 {
+#homepageContainer footer h3 {
   padding-top: 8px;
 }
-footer p {
+#homepageContainer footer p {
   color: #ffffff;
 }
-footer span {
+#homepageContainer footer span {
   font-weight: bold;
   padding-left: 24px;
 }
-footer .ph, footer .address {
+#homepageContainer footer .ph, footer .address {
   padding-top: 12px;
   padding-bottom: 12px;
 }
-footer .fa {
+#homepageContainer footer .fa {
   font-size: 12px;
   padding-right: 10px;
 }
 
 /* social icon */
-.social-icon {
+#homepageContainer .social-icon {
   padding: 0;
 }
-.social-icon li {
+#homepageContainer .social-icon li {
   list-style: none;
   display: inline-block;
   padding: 0;
 }
-.social-icon li a {
+#homepageContainer .social-icon li a {
   background: #f0f0f0;
   border-radius: 50%;
   color: #5C5C5C;
@@ -324,25 +324,25 @@ footer .fa {
   position: relative;
   padding: 0;
 }
-.social-icon li a:hover {
+#homepageContainer .social-icon li a:hover {
   background: #F6D76B;
   top: 5px;
 }
 
 /* copyright section */
-#copyright {
+#homepageContainer #copyright {
   background: #343434;
   color: #ffffff;
   padding-top: 80px;
   padding-bottom: 80px;
   text-align: center;
 }
-#copyright p {
+#homepageContainer #copyright p {
   color: #ffffff;
 }
-#copyright a {
+#homepageContainer #copyright a {
   color: #ffffff;
 }
-#copyright a:hover {
+#homepageContainer #copyright a:hover {
   color: #FF0;
 }
