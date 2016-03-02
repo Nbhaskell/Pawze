@@ -1,35 +1,31 @@
-﻿
-    <title>Registration</title>
-<div id="wrapper">
-    <div id="form">
-        <h1>Registration</h1>
-        <fielset id="signup">
-            <div class="input-box">
-                <label for="name" class="fill_">First Name</label>
-                <input type="text" name="name" ng-model="registration.FirstName">
-            </div>
-            <div class="input-box">
-                <label for="name" class="fill_">Last Name</label>
-                <input type="text" name="name" ng-model="registration.LastName">
-            </div>
-            <div class="input-box">
-                <label for="email" class="fill_">Email</label>
-                <input type="email" name="email" ng-model="registration.EmailAddress">
-            </div>
-            <div class="input-box">
-                <label for="password" class="fill_">Password</label>
-                <input type="password" name="password" ng-model="registration.Password">
-            </div>
-            <div class="input-box">
-                <label for="again" class="fill_">Confirm Password</label>
-                <input type="password" name="again" ng-model="registration.ConfirmPassword">
-            </div>
-            <a href="#/login" class="fill_ button" ng-click="register()">Register</a>
-        </fielset>
-       </div> 
-    </div>
+﻿<div id="loginbutton">
+    <a href="#/login" class="smoothScroll btn btn-default">Login</a>
+</div>
+
+<div class="wrapper">
+    <form class="register">
+        <p class="title">Register</p>
+        <input type="text" placeholder="First Name" autofocus ng-model="registration.FirstName" />
+        <i class="fa fa-user"></i>
+        <input type="text" placeholder="Last Name" ng-model="registration.LastName" />
+        <i class="fa fa-user"></i>
+        <input type="text" placeholder="Email Address" ng-model="registration.EmailAddress" />
+        <i class="fa fa-envelope-o"></i>
+        <input type="password" placeholder="Password" ng-model="registration.Password" />
+        <i class="fa fa-key"></i>
+        <input type="password" placeholder="Confirm Password" ng-model="registration.ConfirmPassword" />
+        <i class="fa fa-key"></i>
+
+        <button ng-click="register()">
+            
+            <span class="state">Register</span>
+        </button>
+
+    </form>
     
+</div>
+
 
     
-<pre>{{registration | json}}</pre>
+
 

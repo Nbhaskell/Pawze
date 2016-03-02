@@ -1,4 +1,4 @@
-﻿angular.module('app', ['ngResource', 'ui.router', 'LocalStorageModule']);
+﻿angular.module('app', ['ngResource', 'ui.router', 'LocalStorageModule', 'smoothScroll']);
 
 angular.module('app').value('apiUrl', 'http://localhost:55442/api');
 

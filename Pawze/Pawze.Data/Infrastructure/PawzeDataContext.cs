@@ -11,7 +11,7 @@ namespace Pawze.Data.Infrastructure
     {
         public PawzeDataContext() : base("Pawze")
         {
-
+            var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
         public IDbSet<Box> Boxes { get; set; }
         public IDbSet<BoxItem> BoxItems { get; set; }
