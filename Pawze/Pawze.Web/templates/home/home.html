@@ -40,13 +40,33 @@
                     <a href="#what" class="smoothScroll btn btn-default">GET STARTED</a>
                 </div>
                 <div class="crt-parallaxvideo">
-                    <video id="stuffVideo" autoplay muted loop>
-                        <source src="movies/DogsCatchingTreats.mp4" type="video/mp4">
-                        <source src="ogv/DogsCatchingTreats.ogv" type="video/ogg">
+                    <video autoplay loop>
+                        <source src="movies/DogsCatchingTreats.mp4" type="video/mp4" />
+                        <source src="webm/DogsCatchingTreats.webm" type="video/webm" />
+                        <source src="ogv/DogsCatchingTreats.ogv" type="video/ogg" />
+                        <object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">
+                            <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
+                            <param name="allowFullScreen" value="true" />
+                            <param name="wmode" value="transparent" />
+                            <param name="flashVars" value="config={'playlist':[{'url':'http%3A%2F%2Fbracken.design%2Fprojects%2FDogsCatchingTreats.mp4','autoPlay':false}]}" />
+                            <!--<span title="No video playback capabilities, please download the video below">DogsCatchingTreats</span>-->
+                        </object>
                     </video>
+
+                    <!-- "Video for iPad -->
+                    <!--<video id="myvideo3" class="ipad-portrait ipad-landscape" controls="controls" poster="/videodrome/cgp_video/leeds1974.png">
+                        ...-->
+
+
+
+                        <!--<video id="stuffVideo" autoplay muted loop>
+            <source src="movies/DogsCatchingTreats.mp4" type="video/mp4">
+            <source src="ogv/DogsCatchingTreats.ogv" type="video/ogg">
+        </video>-->
+
+
                 </div>
-            </div>
-            
+            </div> 
         </div>
     </section>
 
