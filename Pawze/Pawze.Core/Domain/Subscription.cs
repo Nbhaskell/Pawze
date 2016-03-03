@@ -1,6 +1,7 @@
 ﻿using Pawze.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 
@@ -10,7 +11,7 @@ namespace Pawze.Core.Domain
     {
         public Subscription()
         {
-
+            Boxes = new Collection<Box>();
         }
         public Subscription(SubscriptionsModel subscription)
         {
@@ -23,6 +24,7 @@ namespace Pawze.Core.Domain
             StartDate = subscription.StartDate;
             PawzeUserId = subscription.PawzeUserId;
             StripeSubscriptionId = subscription.StripeSubscriptionId;
+      
         }
 
         public int SubscriptionId { get; set; }

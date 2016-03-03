@@ -26,6 +26,7 @@ namespace Pawze.Test.Controllers
         private Mock<IBoxItemRepository> _boxItemRepository = null;
         private Mock<IUnitOfWork> _unitOfWork = null;
         private Mock<IPawzeUserRepository> _pawzeUserRepository = null;
+        private Mock<IPawzeConfigurationRepository> _pawzeConfigRepository = null;
 
         BoxesController controller = null;
 
@@ -46,14 +47,14 @@ namespace Pawze.Test.Controllers
             // Possible google terms
             // complex lambda expressions moq
             // testing lambda expressions in moq
-           
-               
+
+            _pawzeConfigRepository = new Mock<IPawzeConfigurationRepository>();
             _boxItemRepository = new Mock<IBoxItemRepository>();
 
             _unitOfWork = new Mock<IUnitOfWork>();
             _pawzeUserRepository = new Mock<IPawzeUserRepository>();
 
-            controller = new BoxesController(_boxRepository.Object, _boxItemRepository.Object, _unitOfWork.Object, _pawzeUserRepository.Object);
+            controller = new BoxesController(_boxRepository.Object, _pawzeConfigRepository.Object, _boxItemRepository.Object, _unitOfWork.Object, _pawzeUserRepository.Object);
         }
 
         [TestMethod]

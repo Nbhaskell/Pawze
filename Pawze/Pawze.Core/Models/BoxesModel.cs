@@ -11,5 +11,7 @@ namespace Pawze.Core.Models
         public int BoxId { get; set; }
         public int? SubscriptionId { get; set; }
         public string PawzeUserId { get; set; }
+
+        public IEnumerable<BoxItemsModel> BoxItems { get; set; }
     }
 }

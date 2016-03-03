@@ -31,6 +31,20 @@ namespace Pawze.API.Controllers
             );
         }
 
+        // GET: /api/PawzeUser/user
+        [Route("api/pawzeuser/user")]
+        public IHttpActionResult GetCurrentUser()
+        {
+            var currentUser = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name);
+            if (currentUser == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(Mapper.Map<PawzeUsersModel>(currentUser));
+
+        }
+
         // GET: api/PawzeUser/5
         [ResponseType(typeof(PawzeUsersModel))]
         public IHttpActionResult GetPawzeUser(int id)

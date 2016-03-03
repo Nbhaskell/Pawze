@@ -69,7 +69,7 @@ namespace Pawze.Core.Services.Finance
                 StripeSubscriptionId = subscription.Id
             };
 
-           // pawzeSubscription.Boxes.Add(box); delete
+            pawzeSubscription.Boxes.Add(box);
 
             _subscriptionRepository.Add(pawzeSubscription);
 

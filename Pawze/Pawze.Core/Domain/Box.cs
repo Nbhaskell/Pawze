@@ -1,6 +1,7 @@
 ﻿using Pawze.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 
@@ -10,7 +11,7 @@ namespace Pawze.Core.Domain
     {
         public Box()
         {
-
+            BoxItems = new Collection<BoxItem>();
         }
 
         public Box(BoxesModel box)
@@ -23,6 +24,27 @@ namespace Pawze.Core.Domain
             BoxId = box.BoxId;
             SubscriptionId = box.SubscriptionId;
             PawzeUserId = box.PawzeUserId;
+
+            if(BoxId == 0)
+            {
+                // IF IT'S NEW
+                foreach(var boxItem in box.BoxItems)
+                {
+                    var dbBoxItem = new BoxItem();
+                    dbBoxItem.Update(boxItem);
+                    BoxItems.Add(dbBoxItem);
+                }
+            }
+            else
+            {
+                // if it exists
+                foreach (var modelBoxItem in box.BoxItems)
+                {
+                    var databaseBoxItem = BoxItems.FirstOrDefault(bi => bi.BoxItemId == modelBoxItem.BoxItemId);
+
+                    databaseBoxItem.Update(modelBoxItem);
+                }
+            }
         }
 
         public int BoxId { get; set; }
