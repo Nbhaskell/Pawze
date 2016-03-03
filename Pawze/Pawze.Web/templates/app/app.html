@@ -23,9 +23,15 @@
                     <li class="active"><a href="#/app/dashboard">Dashboard<span class="sr-only">(current)</span></a></li>
                     <li><a href="#/home">Home</a></li>
                 </ul>
+                <ul class="nav navbar-nav pull-right">
+                    <li style="background-color:aquamarine;"><a href="#/app/accountsettings"><i class="fa fa-user"></i>&nbsp; {{user.FirstName}} &nbsp;<i class="fa fa-caret-down"></i></a></li>
+                    <li style="background-color:aquamarine;" ng-click="logout()"><a href="#/home">Logout</a></li>
+                </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+
+    <pre>{{user | json}}</pre>
     <div ui-view>
 
     </div>
