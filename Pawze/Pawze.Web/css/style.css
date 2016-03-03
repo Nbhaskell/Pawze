@@ -122,8 +122,8 @@ http://www.tooplate.com/view/2076-zentro
 
 /* home section */
 #homepageContainer #home {
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1) ), 
-              url('../images/../images/DogWithTreat.jpg') 50% 0 repeat-y fixed;
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1) );
+              /*url('../images/../images/DogWithTreat.jpg') 50% 0 repeat-y fixed;*/
   -webkit-background-size: cover;
   background-size: cover;
   background-position: center;
@@ -138,7 +138,33 @@ http://www.tooplate.com/view/2076-zentro
           align-items: center;
   height: 100vh;
   text-align: center;
+  opacity: 0.8;
 }
+
+
+#homepageContainer .crt-parallaxvideo{ 
+    height: 300px;
+    padding-bottom: 150px;
+    padding-top: 50px;
+    min-width: 100vw;
+}
+
+#homepageContainer .crt-parallaxvideo video{ 
+    width: 100vw;
+    position: absolute;
+    left: 0;
+    top:0;
+    z-index: -100;    	
+    height: 100vh;
+}
+#homepageContainer .crt-parallaxvideo h1 {
+    color: #053f80;
+    font-size: 76px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+}
+
 
 #homepageContainer #home h1 {
   font-size: 20px;
