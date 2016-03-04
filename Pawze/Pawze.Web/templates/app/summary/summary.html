@@ -1,46 +1,35 @@
-﻿<div class="panel panel-info">
-    <div class="panel-heading">
-        Review Order <div class="pull-right"><small><a class="afix-1" href="#/app/dashboard">Edit Box</a></small></div>
-    </div>
-    <div class="panel-body">
-        <div class="form-group">
-            <div class="col-sm-3 col-xs-3">
-                <img class="img-responsive" src="//c1.staticflickr.com/1/466/19681864394_c332ae87df_t.jpg" />
-            </div>
-            <div class="col-sm-6 col-xs-6">
-                <div class="col-xs-12">Your Box</div>
-                <div class="col-xs-12"><small>
-                    <ul ng-repeat="boxItem in box.BoxItems">
-                        <li>{{boxItem.Inventory.Name}}</li>
-                    </ul>
-                    </small></div>
-            </div>
-            <div class="col-sm-3 col-xs-3 text-right">
-                <h6><span>$</span>{{getTotal()}}.00</h6>
+﻿<div class="wrapper">
+    <form class="register">
+        <div class="title text-center">
+            <h3>Review Your Order</h3>
+            <small><a href="#/app/dashboard">Edit Box</a></small>
+        </div>
+        <div style="margin-top:0px; margin-bottom: 10px;">
+            <strong>
+                Your Box
+                <span class="pull-right">{{getTotal() | currency:'$'}}</span>
+            </strong>
+        </div>
+        <table class="table table-striped">
+            <tbody>
+                <tr ng-repeat="boxItem in box.BoxItems">
+                    <td>{{boxItem.Inventory.Name}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr />
+        <div class="clearfix">
+            <div class="pull-right">
+                <p><strong>Subtotal</strong><span class="pull-right" style="margin-left:10px;">{{getSubTotal() | currency:'$'}}</span></p>
+                <span><strong>Order Total</strong><span class="pull-right" style="margin-left:10px;">{{getOrderTotal() | currency:'$'}}</span></span>
             </div>
         </div>
-        <div class="form-group"><hr /></div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="pull-right"><span><strong>Subtotal</strong>&nbsp;&nbsp;&nbsp;$</span><span>{{getSubTotal()}}.00</span></div>
-            </div>
+        <hr />
+        <div>
+            <span style="color: red;">Your order will be shipped on the 20th of this month.</span>
         </div>
-        <div class="form-group"><hr /></div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="pull-left">
-                    <span style="color: red;">Your order will be shipped on the 20th of this month.</span>
-                </div>
-                <div class="pull-right"><span><strong>Order Total</strong>&nbsp;&nbsp;&nbsp;$</span><span>{{getOrderTotal()}}.00</span></div>
-            </div>
+        <div>
+            <button id="customButton" class="pull-right">Checkout</button>
         </div>
-    </div>
+    </form>
 </div>
-<!--REVIEW ORDER END-->
-
-<div class="container container-fluid">
-    <button id="customButton">Checkout</button>
-</div>
-
-<pre>{{user | json}}</pre> 
-<pre>{{box | json}}</pre>

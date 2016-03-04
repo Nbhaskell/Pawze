@@ -28,7 +28,14 @@ namespace Pawze.Data.Infrastructure
             var pawzeUser = new PawzeUser
             {
                 UserName = model.EmailAddress,
-                Email = model.EmailAddress
+                Email = model.EmailAddress,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Address1 = model.Address1,
+                Address2 = model.Address2,
+                City = model.City,
+                State = model.State,
+                PostCode = model.PostCode
             };
 
             // save the user

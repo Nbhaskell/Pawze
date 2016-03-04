@@ -97,6 +97,41 @@ namespace Pawze.API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+
+        // PUT: api/PawzeUser/user
+        [Route("api/pawzeuser/user")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutCurrentPawzeUser(PawzeUsersModel user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            PawzeUser dbPawzeUser = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name);
+            dbPawzeUser.Update(user);
+
+            _pawzeUserRepository.Update(dbPawzeUser);
+
+            try
+            {
+                _unitOfWork.Commit();
+            }
+            catch (Exception)
+            {
+                if (!PawzeUserExists(user.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
         // POST: api/PawzeUser
         [ResponseType(typeof(PawzeUsersModel))]
         public IHttpActionResult PostPawzeUser(PawzeUsersModel user)

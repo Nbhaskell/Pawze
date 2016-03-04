@@ -52,8 +52,10 @@
         }).success(function (response) {
             console.log(response);
             localStorageService.set('token', {
-                token: response.access_token,
-                //user: loginData.username
+                token: response.access_token
+            });
+            localStorageService.set('user', {
+                user: loginData.username
             });
             state.authorized = true;
             deferred.resolve(response);
@@ -69,6 +71,7 @@
     function logout() {
         // this will log the user out
         localStorageService.remove('token');
+        localStorageService.remove('user');
         state.authorized = false;
     }
 

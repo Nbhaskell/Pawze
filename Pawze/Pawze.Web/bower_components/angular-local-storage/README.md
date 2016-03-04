@@ -243,7 +243,7 @@ myApp.controller('MainCtrl', function($scope, localStorageService) {
   $scope.update = function(val) {
     $scope.property = val;
     $timeout(function() {
-      alert("localStorage value: " + localStorageService.get('property'));
+      bootbox.alert("localStorage value: " + localStorageService.get('property'));
     });
   }
   //...
