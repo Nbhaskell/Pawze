@@ -181,9 +181,7 @@ http://www.tooplate.com/view/2076-zentro
 #homepageContainer #what p {
     color: black;
 }
-#homepageContainer #what .col-md-4 {
- padding-top: 42px;
-}
+
 #homepageContainer #what img {
     width: 350px; 
     height: 300px;
@@ -355,48 +353,39 @@ http://www.tooplate.com/view/2076-zentro
 }
 
 #homepageContainer #how {
-    margin-top: 65em;
+    margin-top: 1em;
 }
 
+
+/* what is pawze section */
 
 /*********************************
     inventory section home page
 *********************************/
 #inventorysection {
- 
+ margin-top: 3em;
 }
 /***********************
      BEEF
 ************************/
-#beef {
-    margin-left: auto;
-    margin-right: auto;
-    overflow: auto;
-}
 
 .details {
     padding-top: 7em;
     font-weight: bolder;
+    
+}
+.back .details {
+    padding-top: 25%;
 }
 
-.flip-container {
-  position:absolute;
-  left:15%;
-  top:32%;
-  margin-top:-100px;
-  margin-left:-100px;
-  -webkit-perspective:1200;
-  -moz-perspective:1200;
-  perspective:1200;
-}
 .flip-container:hover .creation {
   -webkit-transform:rotateY(180deg);
   -moz-transform:rotateY(180deg);
 }
 .creation {
-  width:370px;
+  width:350px;
   height:350px;
-  /*float:left;*/
+  margin: 10px;
   -webkit-transition:all 0.6s;
   -moz-transition:all 0.6s;
   transition:all 0.6s;
@@ -444,7 +433,7 @@ http://www.tooplate.com/view/2076-zentro
   border:8px solid #1abc9c;
 }
 
-#frontimg {
+#beef .flip-container .creation .front .cont  {
     background-image: url('../images/beef_veggie_morsels.jpg');
     background-size: cover;
 }
@@ -453,76 +442,8 @@ http://www.tooplate.com/view/2076-zentro
 /***********************
      PORK LIVER 
 ************************/
-.details1 {
-    padding-top: 7em;
-    font-weight: bolder;
-}
-.flip-container1 {
-  position:absolute;
-  left:46%;
 
-  top:32%;
-  margin-top:-100px;
-  margin-left:-100px;
-  -webkit-perspective:1200;
-  -moz-perspective:1200;
-  perspective:1200;
-}
-.flip-container1:hover .creation1 {
-  -webkit-transform:rotateY(180deg);
-  -moz-transform:rotateY(180deg);
-}
-.creation1 {
-  width:370px;
-  height:350px;
-  /*float:left;*/
-  -webkit-transition:all 0.6s;
-  -moz-transition:all 0.6s;
-  transition:all 0.6s;
-  -webkit-transform-style:preserve-3d;
-  -moz-transform-style:preserve-3d;
-  transform-style:preserve-3d;
-}
-.front1, .back1 {
-  position:absolute;
-  top:0;
-  left:0;
-  -webkit-backface-visibility:hidden; 
-  -moz-backface-visibility:hidden;
-  backface-visibility:hidden;
-}
-
-.back1 {
-  z-index:800;
-  -webkit-transform:rotateY(-180deg);
-  -moz-transform:rotateY(-180deg);
-  transform:rotateY(-180deg);
-}
-.creation1 p {
-  color:#666;
-  display:block;
-  width:auto;
-  text-align:center;
-  line-height:200px;
-  margin:0 30px;
-  font-size:27px;
-  text-transform:uppercase;
-  text-shadow:1px 1px 1px #999;
-  font-family:sans-serif;
-}
-.creation1 p span {
-  vertical-align:middle;
-  display:inline-block;
-  line-height:1.4;
-}
-.cont1 {
-  border-radius:50%;
-  width:350px;
-  height:350px;
-  display:inline-block;
-  border:8px solid #1abc9c;
-}
-#frontimg1 {
+#porkliver .flip-container .creation .front .cont {
     background-image: url('../images/chicken_liver.jpg');
     background-size: cover;
 }
@@ -530,76 +451,8 @@ http://www.tooplate.com/view/2076-zentro
 /***********************
      CHICKEN HEART 
 ************************/
-.details2 {
-    padding-top: 7em;
-    font-weight: bolder;
-}
-.flip-container2 {
-  position:absolute;
-  
-  right: 10%;
-  top:32%;
-  margin-top:-100px;
-  margin-left:-100px;
-  -webkit-perspective:1200;
-  -moz-perspective:1200;
-  perspective:1200;
-}
-.flip-container2:hover .creation2 {
-  -webkit-transform:rotateY(180deg);
-  -moz-transform:rotateY(180deg);
-}
-.creation2 {
-  width:370px;
-  height:350px;
-  /*float:left;*/
-  -webkit-transition:all 0.6s;
-  -moz-transition:all 0.6s;
-  transition:all 0.6s;
-  -webkit-transform-style:preserve-3d;
-  -moz-transform-style:preserve-3d;
-  transform-style:preserve-3d;
-}
-.front2, .back2 {
-  position:absolute;
-  top:0;
-  left:0;
-  -webkit-backface-visibility:hidden; 
-  -moz-backface-visibility:hidden;
-  backface-visibility:hidden;
-}
 
-.back2 {
-  z-index:800;
-  -webkit-transform:rotateY(-180deg);
-  -moz-transform:rotateY(-180deg);
-  transform:rotateY(-180deg);
-}
-.creation2 p {
-  color:#666;
-  display:block;
-  width:auto;
-  text-align:center;
-  line-height:200px;
-  margin:0 30px;
-  font-size:27px;
-  text-transform:uppercase;
-  text-shadow:1px 1px 1px #999;
-  font-family:sans-serif;
-}
-.creation2 p span {
-  vertical-align:middle;
-  display:inline-block;
-  line-height:1.4;
-}
-.cont2 {
-  border-radius:50%;
-  width:350px;
-  height:350px;
-  display:inline-block;
-  border:8px solid #1abc9c;
-}
-#frontimg2 {
+#chickenheart .flip-container .creation .front .cont {
     background-image: url('../images/chicken_heart.jpg');
     background-size: cover;
 }
@@ -607,76 +460,8 @@ http://www.tooplate.com/view/2076-zentro
 /***********************
       PUMPKIN 
 ************************/
-.details3 {
-    padding-top: 7em;
-    font-weight: bolder;
-}
-.flip-container3 {
-  position:absolute;
-  
-  Left:15%;
-  top:43%;
-  margin-top:-100px;
-  margin-left:-100px;
-  -webkit-perspective:1200;
-  -moz-perspective:1200;
-  perspective:1200;
-}
-.flip-container3:hover .creation3 {
-  -webkit-transform:rotateY(180deg);
-  -moz-transform:rotateY(180deg);
-}
-.creation3 {
-  width:370px;
-  height:350px;
-  /*float:left;*/
-  -webkit-transition:all 0.6s;
-  -moz-transition:all 0.6s;
-  transition:all 0.6s;
-  -webkit-transform-style:preserve-3d;
-  -moz-transform-style:preserve-3d;
-  transform-style:preserve-3d;
-}
-.front3, .back3 {
-  position:absolute;
-  top:0;
-  left:0;
-  -webkit-backface-visibility:hidden; 
-  -moz-backface-visibility:hidden;
-  backface-visibility:hidden;
-}
 
-.back3 {
-  z-index:800;
-  -webkit-transform:rotateY(-180deg);
-  -moz-transform:rotateY(-180deg);
-  transform:rotateY(-180deg);
-}
-.creation3 p {
-  color:#666;
-  display:block;
-  width:auto;
-  text-align:center;
-  line-height:200px;
-  margin:0 30px;
-  font-size:27px;
-  text-transform:uppercase;
-  text-shadow:1px 1px 1px #999;
-  font-family:sans-serif;
-}
-.creation3 p span {
-  vertical-align:middle;
-  display:inline-block;
-  line-height:1.4;
-}
-.cont3 {
-  border-radius:50%;
-  width:350px;
-  height:350px;
-  display:inline-block;
-  border:8px solid #1abc9c;
-}
-#frontimg3 {
+#pumpkin .flip-container .creation .front .cont {
     background-image: url('../images/Pumpkin.jpg');
     background-size: cover;
 }
@@ -685,75 +470,7 @@ http://www.tooplate.com/view/2076-zentro
      SALMON STEAKS
 ************************/
 
-.details4 {
-    padding-top: 7em;
-    font-weight: bolder;
-}
-.flip-container4 {
-  position:absolute;
-  left:46%;
-  top:43%;
-  margin-top:-100px;
-  margin-left:-100px;
-  -webkit-perspective:1200;
-  -moz-perspective:1200;
-  perspective:1200;
-}
-.flip-container4:hover .creation4 {
-  -webkit-transform:rotateY(180deg);
-  -moz-transform:rotateY(180deg);
-}
-.creation4 {
-  width:370px;
-  height:350px;
-  /*float:left;*/
-  -webkit-transition:all 0.6s;
-  -moz-transition:all 0.6s;
-  transition:all 0.6s;
-  -webkit-transform-style:preserve-3d;
-  -moz-transform-style:preserve-3d;
-  transform-style:preserve-3d;
-}
-.front4, .back4 {
-  position:absolute;
-  top:0;
-  left:0;
-  -webkit-backface-visibility:hidden; 
-  -moz-backface-visibility:hidden;
-  backface-visibility:hidden;
-}
-
-.back4 {
-  z-index:800;
-  -webkit-transform:rotateY(-180deg);
-  -moz-transform:rotateY(-180deg);
-  transform:rotateY(-180deg);
-}
-.creation4 p {
-  color:#666;
-  display:block;
-  width:auto;
-  text-align:center;
-  line-height:200px;
-  margin:0 30px;
-  font-size:27px;
-  text-transform:uppercase;
-  text-shadow:1px 1px 1px #999;
-  font-family:sans-serif;
-}
-.creation4 p span {
-  vertical-align:middle;
-  display:inline-block;
-  line-height:1.4;
-}
-.cont4 {
-  border-radius:50%;
-  width:350px;
-  height:350px;
-  display:inline-block;
-  border:8px solid #1abc9c;
-}
-#frontimg4 {
+#salmonsteak .flip-container .creation .front .cont {
     background-image: url('../images/salmon_steak.jpg');
     background-size: cover;
 }
@@ -761,77 +478,48 @@ http://www.tooplate.com/view/2076-zentro
 /***********************
      DUCK LIVER 
 ************************/
-
-.details5 {
-    padding-top: 7em;
-    font-weight: bolder;
-}
-.flip-container5 {
-  position:absolute;
-  
-  right: 10%;
-  top:43%;
-  margin-top:-100px;
-  margin-left:-100px;
-  -webkit-perspective:1200;
-  -moz-perspective:1200;
-  perspective:1200;
-}
-.flip-container5:hover .creation5 {
-  -webkit-transform:rotateY(180deg);
-  -moz-transform:rotateY(180deg);
-}
-.creation5 {
-  width:370px;
-  height:350px;
-  /*float:left;*/
-  -webkit-transition:all 0.6s;
-  -moz-transition:all 0.6s;
-  transition:all 0.6s;
-  -webkit-transform-style:preserve-3d;
-  -moz-transform-style:preserve-3d;
-  transform-style:preserve-3d;
-}
-.front5, .back5 {
-  position:absolute;
-  top:0;
-  left:0;
-  -webkit-backface-visibility:hidden; 
-  -moz-backface-visibility:hidden;
-  backface-visibility:hidden;
-}
-
-.back5 {
-  z-index:800;
-  -webkit-transform:rotateY(-180deg);
-  -moz-transform:rotateY(-180deg);
-  transform:rotateY(-180deg);
-}
-.creation5 p {
-  color:#666;
-  display:block;
-  width:auto;
-  text-align:center;
-  line-height:200px;
-  margin:0 30px;
-  font-size:27px;
-  text-transform:uppercase;
-  text-shadow:1px 1px 1px #999;
-  font-family:sans-serif;
-}
-.creation5 p span {
-  vertical-align:middle;
-  display:inline-block;
-  line-height:1.4;
-}
-.cont5 {
-  border-radius:50%;
-  width:350px;
-  height:350px;
-  display:inline-block;
-  border:8px solid #1abc9c;
-}
-#frontimg5 {
+#duckliver .flip-container .creation .front .cont {
     background-image: url('../images/duck_liver.jpg');
     background-size: cover;
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+    .creation {
+        margin: 10px auto !important;
+    }
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+  
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+    
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+    .creation {
+        width: 250px;
+        height: 300px;
+    }
+    .cont {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+    .creation {
+        width: 350px;
+        height: 350px;
+    }
+    .cont {
+        width: 350px;
+        height: 350px;
+    }
 }
