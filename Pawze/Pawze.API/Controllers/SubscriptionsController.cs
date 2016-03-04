@@ -38,6 +38,15 @@ namespace Pawze.API.Controllers
             );
         }
 
+        // GET: api/Subscriptions/active
+        [Route("api/subscriptions/active")]
+        public IEnumerable<SubscriptionsModel> GetActiveSubscriptions()
+        {
+            return Mapper.Map<IEnumerable<SubscriptionsModel>>(
+                _subscriptionRepository.GetWhere(m => m.PawzeUser.UserName == User.Identity.Name && m.StripeSubscriptionId != null)
+            );
+        }
+
         // GET: api/Subscriptions/5
         [ResponseType(typeof(SubscriptionsModel))]
         public IHttpActionResult GetSubscription(int id)
@@ -113,14 +122,12 @@ namespace Pawze.API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = subscription.SubscriptionId }, subscription);
         }
 
-        //[AllowAnonymous] //TODO: DUDE!!!!!! REMOVE THIS!!!!!
         [HttpPost]
         [Route("api/subscriptions/create")]
         public IHttpActionResult CreateSubscription(StripePaymentParams payment)
         {
             _subscriptionService.Create(
-                _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name),
-               /* _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner"), //TODO: AND THIS!!!*/
+                _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name), 
                 _boxRepository.GetById(payment.boxId),
                 payment.stripeToken
             );
@@ -128,18 +135,15 @@ namespace Pawze.API.Controllers
             return Ok();
         }
 
-        //[AllowAnonymous] //TODO: DUDE!!!!!! REMOVE THIS!!!!!
         [HttpPost]
         [Route("api/subscriptions/cancel")]
-        public IHttpActionResult CancelSubscription(StripePaymentParams payment)
+        public IHttpActionResult CancelSubscription()
         {
             var user = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name);
-            //var user = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner");//// AND THIS!!!!
 
             _subscriptionService.Cancel(
                 _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name),
-                //_pawzeUserRepository.GetFirstOrDefault(u => u.UserName == "tboner"), //TODO: AND THIS!!!!!!!
-                _subscriptionRepository.GetFirstOrDefault(u => u.PawzeUserId == user.Id)
+             _subscriptionRepository.GetFirstOrDefault(u => u.PawzeUserId == user.Id && u.StripeSubscriptionId != null)
             );
 
             return Ok();

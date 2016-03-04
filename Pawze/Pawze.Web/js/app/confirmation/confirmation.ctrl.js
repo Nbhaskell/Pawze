@@ -13,7 +13,7 @@
                $scope.email = response.data.Email;
            })
            .catch(function (err) {
-               alert('Failed to get the user');
+               //bootbox.alert('Failed to get the user');
            });
         $http.get(apiUrl + '/boxes/user')
              .then(function (response) {
@@ -40,7 +40,7 @@
                  }
              })
              .catch(function (err) {
-                 alert('Failed to get the box');
+                 bootbox.alert('Failed to get the box');
              });
     }
     $scope.email = ""

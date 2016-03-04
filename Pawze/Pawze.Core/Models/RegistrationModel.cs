@@ -15,6 +15,21 @@ namespace Pawze.Core.Models
         public string LastName { get; set; }
 
         [Required]
+        public string Address1 { get; set; }
+
+        public string Address2 { get; set; }
+
+        [Required]
+        public string City { get; set; }
+
+        [Required]
+        public string State { get; set; }
+
+        [Required]
+        public string PostCode { get; set; }
+
+
+        [Required]
         public string EmailAddress { get; set; }
 
         [Required]
@@ -27,6 +42,5 @@ namespace Pawze.Core.Models
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirm passwords do not match.")]
         public string ConfirmPassword { get; set; }
-
     }
 }
