@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('AppController', function ($scope, localStorageService, apiUrl, $http) {
+﻿angular.module('app').controller('AppController', function ($scope, localStorageService, apiUrl, AuthenticationService, $http) {
     
 
     function activate() {
@@ -7,7 +7,7 @@
               $scope.user = response.data;
           })
           .catch(function (err) {
-              alert('Failed to get the user');
+              // bootbox.alert('Please re-enter your ');
           });
     };
 

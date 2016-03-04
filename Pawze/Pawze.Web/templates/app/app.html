@@ -22,16 +22,29 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#/app/dashboard">Dashboard<span class="sr-only">(current)</span></a></li>
                     <li><a href="#/home">Home</a></li>
+                    <li class="visible-xs"><a href="#">Profile Information</a></li>
+                    <li class="visible-xs"><a href="#">Log Out</a></li>
                 </ul>
-                <ul class="nav navbar-nav pull-right">
+                <ul class="nav navbar-nav navbar-right hidden-xs">
+                    <li>
+                        <button id="asbtn" class="pull-right">
+                            <span>{{user.FirstName}}</span>&nbsp;<i class="fa fa-user"></i>
+                            <ul id="asdropdown" style="z-index:1">
+                                <li class="active"><a href="#/app/accountsettings">Your Account</a></li>
+                                <li ng-click="logout()"><a href="#/home">Log Out</a></li>
+                            </ul>
+                        </button>
+                    </li>
+                </ul>
+                
+                <!-- <ul class="nav navbar-nav pull-right">
                     <li style="background-color:aquamarine;"><a href="#/app/accountsettings"><i class="fa fa-user"></i>&nbsp; {{user.FirstName}} &nbsp;<i class="fa fa-caret-down"></i></a></li>
                     <li style="background-color:aquamarine;" ng-click="logout()"><a href="#/home">Logout</a></li>
-                </ul>
+                </ul> -->
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
 
-    <pre>{{user | json}}</pre>
     <div ui-view>
 
     </div>

@@ -9,7 +9,7 @@
                $scope.email = response.data.Email;
            })
            .catch(function (err) {
-               alert('Failed to get the user');
+               //bootbox.alert('Failed to get the user');
            });
         $http.get(apiUrl + '/boxes/user')
              .then(function (response) {
@@ -36,7 +36,7 @@
                  }
              })
              .catch(function (err) {
-                 alert('Failed to get the box');
+                 bootbox.alert('Failed to get the box');
              });
     }
     $scope.email = ""
@@ -47,25 +47,24 @@
         return userEmail;
     };
 
-    var handler = StripeCheckout.configure({
-        key: 'pk_test_fhxY8eOWWpOb6dE1K7rBCgik',
-        locale: 'auto',
-        allowRememberMe: false,
-        email: "cd@gmail.com", //TODO: update to pull from user
-        token: function (token) {
-            $http.post(apiUrl + '/subscriptions/create', {
-                stripeToken: token.id,
-                boxId: $scope.box.BoxId, //TODO: This is where you'll need the box id to create a subscription for. --done
-            }).success(function () {
-                alert('charged ya'); //delete
-                $state.go('app.confirmation');
-            }).error(function () {
-                alert('could not charge you, please retry payment'); //delete
-            });
-        }
-    });
-
     $('#customButton').on('click', function (e) {
+        var handler = StripeCheckout.configure({
+            key: 'pk_test_fhxY8eOWWpOb6dE1K7rBCgik',
+            locale: 'auto',
+            allowRememberMe: false,
+            email: getUserEmail(), //TODO: update to pull from user
+            token: function (token) {
+                $http.post(apiUrl + '/subscriptions/create', {
+                    stripeToken: token.id,
+                    boxId: $scope.box.BoxId, //TODO: This is where you'll need the box id to create a subscription for. --done
+                }).success(function () {
+                    //bootbox.alert('charged ya'); //delete
+                    $state.go('app.confirmation');
+                }).error(function () {
+                    bootbox.alert('could not charge you, please retry payment'); //delete
+                });
+            }
+        });
         var chargeAmt = $scope.getOrderTotal() * 100;
         // Open Checkout with further options
         handler.open({

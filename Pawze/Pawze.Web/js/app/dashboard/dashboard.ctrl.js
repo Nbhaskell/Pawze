@@ -6,9 +6,16 @@
                  $scope.box = response.data;
              })
              .catch(function (err) {
-                 alert('Failed to get the box');
+                 //bootbox.alert('Failed to get the box');
              });
-    $scope.inventories = InventoryResource.query();
+        $http.get(apiUrl + '/subscriptions/active')
+            .then(function (response) {
+                $scope.subscriptions = response.data;
+            })
+             .catch(function (err) {
+                 //bootbox.alert('Failed to get the box');
+             });
+        $scope.inventories = InventoryResource.query();
     }
 
     activate();
@@ -19,22 +26,30 @@
         boxItem.Inventory = inventory;
     };
 
+    $scope.redirect = function () {
+        if ($scope.subscriptions.length == 0) {
+            $state.go('app.summary');
+        }
+        else {
+            $state.go('app.confirmation');
+        }
+    }
+
     $scope.save = function () {
         if ($scope.box.BoxId === 0) {
             BoxResource.save($scope.box, function (newBox) {
-                alert('Saved box, box id is now ' + newBox.BoxId);
-                $state.go('app.summary');
-            }); 
+                bootbox.alert('Saved box, box id is now ' + newBox.BoxId);
+                $scope.redirect();
+            });
         } else {
             $http.put(apiUrl + '/boxes/' + $scope.box.BoxId, $scope.box)
                  .then(function () {
-                     alert('Updated box successfully');
-                     $state.go('app.confirmation');
+                     bootbox.alert('Updated box successfully');
+                     $scope.redirect();
                  })
                  .catch(function (err) {
-                     alert('Couldn\'t update the box');
-                 })
-            ;
+                     bootbox.alert('Couldn\'t update the box');
+                 });
         }
     };
 
