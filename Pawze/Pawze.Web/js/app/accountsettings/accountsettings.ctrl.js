@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('AccountSettingsController', function ($scope, $http, apiUrl, SubscriptionResource) {
+﻿angular.module('app').controller('AccountSettingsController', function ($scope, $state, $http, apiUrl, SubscriptionResource) {
 
     function activate() {
         $http.get(apiUrl + '/pawzeuser/user')
@@ -8,7 +8,21 @@
                .catch(function (err) {
                    //bootbox.alert('Failed to get the user');
                });
-        $scope.subscription = SubscriptionResource.query();
+
+        $http.get(apiUrl + '/subscriptions/active')
+            .then(function (response) {
+                $scope.subscription = response.data;
+
+                if ($scope.subscription.length > 0) {
+                    $scope.cancellation = true;
+                }
+                else {
+                    $scope.cancellation = false;
+                }
+            })
+             .catch(function (err) {
+                 //bootbox.alert('Failed to get the box');
+             });
     }
 
     activate();
@@ -24,28 +38,22 @@
     };
 
     $scope.cancel = function () {
-        // TODO: FIX THIS.
-        $scope.subscription = SubscriptionResource.query();
-
-        if ($scope.subscription != null) {
+        if ($scope.subscription.length > 0) {
             bootbox.confirm("Are you sure you want to cancel?", function (result) {
-                if (result) {
-                    $http.post(apiUrl + '/subscriptions/cancel', {
-                        stripeToken: $scope.subscription.StripeSubscriptionId
-                    }).success(function () {
-                        bootbox.alert('Subscription Cancelled.'); //delete
-                    }).error(function () {
-                        bootbox.alert('Could not cancel subscription, Sorry bout it.'); //delete
-                    });
-                }
+                $http.post(apiUrl + '/subscriptions/cancel', {
+                    stripeToken: $scope.subscription.StripeSubscriptionId
+                }).success(function () {
+                    bootbox.alert('Subscription Cancelled.'); //delete
+                    activate();
+                }).error(function () {
+                    bootbox.alert('Could not cancel subscription, Sorry bout it.'); //delete
+                });
             });
         }
         else
         {
             bootbox.alert("You don't have an active subscription.");
         }
-        
-        
     };
 
     
