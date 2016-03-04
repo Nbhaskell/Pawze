@@ -23,12 +23,14 @@ namespace Pawze.API.Controllers
         private IBoxRepository _boxRepository;
         private IBoxItemRepository _boxItemRepository;
         private IPawzeUserRepository _userRepository;
+        private IPawzeConfigurationRepository _configRepository;
         private IUnitOfWork _unitOfWork;
 
-        public BoxesController(IBoxRepository boxRepository, IBoxItemRepository boxItemRepository, IUnitOfWork unitOfWork, IPawzeUserRepository userRepository)
+        public BoxesController(IBoxRepository boxRepository, IPawzeConfigurationRepository configRepository, IBoxItemRepository boxItemRepository, IUnitOfWork unitOfWork, IPawzeUserRepository userRepository)
         {
             _boxRepository = boxRepository;
             _boxItemRepository = boxItemRepository;
+            _configRepository = configRepository;
             _unitOfWork = unitOfWork;
             _userRepository = userRepository;
         }
@@ -48,6 +50,30 @@ namespace Pawze.API.Controllers
             var boxItems = _boxItemRepository.GetWhere(bi => bi.BoxId == id);
 
             return Mapper.Map<IEnumerable<BoxItemsModel>>(boxItems);
+        }
+
+        // GET: /api/Boxes/user
+        [Route("api/boxes/user")]
+        public BoxesModel GetBoxForCurrentUser()
+        {
+            var currentUser = _userRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name);
+
+            var dbBox = _boxRepository.GetFirstOrDefault(b => b.PawzeUser.UserName == currentUser.UserName);
+
+            if(dbBox == null)
+            {
+                return new BoxesModel
+                {
+                    BoxItems = new BoxItemsModel[]
+                    {
+                        new BoxItemsModel(), new BoxItemsModel(), new BoxItemsModel(), new BoxItemsModel()
+                    }
+                };
+            }
+            else
+            {
+                return Mapper.Map<BoxesModel>(dbBox);
+            }
         }
 
         // GET: api/Boxes/5
@@ -117,6 +143,11 @@ namespace Pawze.API.Controllers
             dbBox.PawzeUser = _userRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name);
 
             dbBox.Update(box);
+
+            foreach (var boxItem in dbBox.BoxItems)
+            {
+                boxItem.BoxItemPrice = _configRepository.GetAll().First().CurrentBoxItemPrice;
+            }
 
             _boxRepository.Add(dbBox);
 

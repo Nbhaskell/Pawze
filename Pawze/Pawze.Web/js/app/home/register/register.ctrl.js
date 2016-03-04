@@ -4,13 +4,13 @@
     $scope.register = function () {
         AuthenticationService.registerCustomer($scope.registration).then(
             function (response) {
-                alert("Registration Complete");
+                bootbox.alert("Registration Complete");
                 $timeout(function () {
                     location.replace('/#/login');
                 }, 2000);
             },
             function (error) {
-                alert("Failed To Register");
+                bootbox.alert("Failed To Register");
             }
         );
     };

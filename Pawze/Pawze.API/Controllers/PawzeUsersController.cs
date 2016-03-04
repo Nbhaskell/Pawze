@@ -31,6 +31,20 @@ namespace Pawze.API.Controllers
             );
         }
 
+        // GET: /api/PawzeUser/user
+        [Route("api/pawzeuser/user")]
+        public IHttpActionResult GetCurrentUser()
+        {
+            var currentUser = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name);
+            if (currentUser == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(Mapper.Map<PawzeUsersModel>(currentUser));
+
+        }
+
         // GET: api/PawzeUser/5
         [ResponseType(typeof(PawzeUsersModel))]
         public IHttpActionResult GetPawzeUser(int id)
@@ -71,6 +85,41 @@ namespace Pawze.API.Controllers
             catch (Exception)
             {
                 if (!PawzeUserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+
+        // PUT: api/PawzeUser/user
+        [Route("api/pawzeuser/user")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutCurrentPawzeUser(PawzeUsersModel user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            PawzeUser dbPawzeUser = _pawzeUserRepository.GetFirstOrDefault(u => u.UserName == User.Identity.Name);
+            dbPawzeUser.Update(user);
+
+            _pawzeUserRepository.Update(dbPawzeUser);
+
+            try
+            {
+                _unitOfWork.Commit();
+            }
+            catch (Exception)
+            {
+                if (!PawzeUserExists(user.Id))
                 {
                     return NotFound();
                 }
