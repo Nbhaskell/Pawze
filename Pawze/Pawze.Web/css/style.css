@@ -181,9 +181,7 @@ http://www.tooplate.com/view/2076-zentro
 #homepageContainer #what p {
     color: black;
 }
-#homepageContainer #what .col-md-4 {
- padding-top: 42px;
-}
+
 #homepageContainer #what img {
     width: 350px; 
     height: 300px;
@@ -249,10 +247,10 @@ http://www.tooplate.com/view/2076-zentro
 #homepageContainer #contact .form-control:focus {
   border-color: #f9f9f9;
 }
-#homepageContainer #contact input {
+#homepageContainer #contact #homeregbutton {
   height: 48px;
 }
-#homepageContainer #contact input[type="submit"] {
+#homepageContainer #contact #homeregbutton[type="submit"] {
   background: transparent;
   border: 2px solid #999;
   border-radius: 10px;
@@ -260,9 +258,16 @@ http://www.tooplate.com/view/2076-zentro
   margin-top: 12px;
   height: 50px;
 }
-#homepageContainer #contact input[type="submit"]:hover {
+#homepageContainer #contact #homeregbutton[type="submit"]:hover {
   background: #999;
   color: #ffffff;
+}
+
+#homepageContainer #homeregbutton {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 900;
+      padding-top: 1em;
+      letter-spacing: 4px;
 }
 
 /* footer section */
@@ -345,4 +350,176 @@ http://www.tooplate.com/view/2076-zentro
 }
 #homepageContainer #copyright a:hover {
   color: #FF0;
+}
+
+#homepageContainer #how {
+    margin-top: 1em;
+}
+
+
+/* what is pawze section */
+
+/*********************************
+    inventory section home page
+*********************************/
+#inventorysection {
+ margin-top: 3em;
+}
+/***********************
+     BEEF
+************************/
+
+.details {
+    padding-top: 7em;
+    font-weight: bolder;
+    
+}
+.back .details {
+    padding-top: 25%;
+}
+
+.flip-container:hover .creation {
+  -webkit-transform:rotateY(180deg);
+  -moz-transform:rotateY(180deg);
+}
+.creation {
+  width:350px;
+  height:350px;
+  margin: 10px;
+  -webkit-transition:all 0.6s;
+  -moz-transition:all 0.6s;
+  transition:all 0.6s;
+  -webkit-transform-style:preserve-3d;
+  -moz-transform-style:preserve-3d;
+  transform-style:preserve-3d;
+}
+.front, .back {
+  position:absolute;
+  top:0;
+  left:0;
+  -webkit-backface-visibility:hidden; 
+  -moz-backface-visibility:hidden;
+  backface-visibility:hidden;
+}
+
+.back {
+  z-index:800;
+  -webkit-transform:rotateY(-180deg);
+  -moz-transform:rotateY(-180deg);
+  transform:rotateY(-180deg);
+}
+.creation p {
+  color:#666;
+  display:block;
+  width:auto;
+  text-align:center;
+  line-height:200px;
+  margin:0 30px;
+  font-size:27px;
+  text-transform:uppercase;
+  text-shadow:1px 1px 1px #999;
+  font-family:sans-serif;
+}
+.creation p span {
+  vertical-align:middle;
+  display:inline-block;
+  line-height:1.4;
+}
+.cont {
+  border-radius:50%;
+  width:350px; 
+  height:350px;
+  display:inline-block;
+  border:8px solid #1abc9c;
+}
+
+#beef .flip-container .creation .front .cont  {
+    background-image: url('../images/beef_veggie_morsels.jpg');
+    background-size: cover;
+}
+
+
+/***********************
+     PORK LIVER 
+************************/
+
+#porkliver .flip-container .creation .front .cont {
+    background-image: url('../images/chicken_liver.jpg');
+    background-size: cover;
+}
+
+/***********************
+     CHICKEN HEART 
+************************/
+
+#chickenheart .flip-container .creation .front .cont {
+    background-image: url('../images/chicken_heart.jpg');
+    background-size: cover;
+}
+
+/***********************
+      PUMPKIN 
+************************/
+
+#pumpkin .flip-container .creation .front .cont {
+    background-image: url('../images/Pumpkin.jpg');
+    background-size: cover;
+}
+
+/***********************
+     SALMON STEAKS
+************************/
+
+#salmonsteak .flip-container .creation .front .cont {
+    background-image: url('../images/salmon_steak.jpg');
+    background-size: cover;
+}
+
+/***********************
+     DUCK LIVER 
+************************/
+#duckliver .flip-container .creation .front .cont {
+    background-image: url('../images/duck_liver.jpg');
+    background-size: cover;
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+    .creation {
+        margin: 10px auto !important;
+    }
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+  
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+    
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+    .creation {
+        width: 250px;
+        height: 300px;
+    }
+    .cont {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+    .creation {
+        width: 350px;
+        height: 350px;
+    }
+    .cont {
+        width: 350px;
+        height: 350px;
+    }
 }
