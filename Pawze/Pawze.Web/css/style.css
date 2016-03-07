@@ -222,12 +222,12 @@ http://www.tooplate.com/view/2076-zentro
     color: white;
 }
 
-<<<<<<< HEAD
+
 #homepageContainer #home .btn {
     background: transparent;
     border-radius: 0;
     border: 3px solid #ffffff;
-    color: #ffffff;
+    color: #fff;
     font-weight: bold;
     letter-spacing: 2px;
     padding: 16px 42px;
@@ -236,42 +236,42 @@ http://www.tooplate.com/view/2076-zentro
 }
 
     #homepageContainer #home .btn:hover {
-        background: #ffffff;
+        background: #fff;
         color: #202020;
     }
 
 /* treats section */
 #homepageContainer #treats {
     text-align: center;
-=======
-#homepageContainer #what img {
-    width: 350px; 
-    height: 300px;
->>>>>>> 8ef11df80538b98035f9e3053be62a1b6bc25ec8
 }
 
-    #homepageContainer #treats h3 {
-        font-size: 18px;
-        line-height: 4px;
-    }
+#homepageContainer #what img {
+    width: 350px;
+    height: 300px;
+}
 
-    #homepageContainer #treats h4 {
-        color: #5C5C5C;
-        padding-top: 24px;
-    }
+#homepageContainer #treats h3 {
+    font-size: 18px;
+    line-height: 4px;
+}
 
-    #homepageContainer #treats p {
-        color: black;
-    }
+#homepageContainer #treats h4 {
+    color: #5C5C5C;
+    padding-top: 24px;
+}
 
-    #homepageContainer #treats .col-md-4 {
-        padding-top: 42px;
-    }
+#homepageContainer #treats p {
+    color: black;
+}
 
-    #homepageContainer #treats img {
-        width: 350px;
-        height: 300px;
-    }
+#homepageContainer #treats .col-md-4 {
+    padding-top: 42px;
+}
+
+#homepageContainer #treats img {
+    width: 350px;
+    height: 300px;
+}
 
 /* how does it work section */
 #homepageContainer #how h4 {
@@ -321,7 +321,6 @@ http://www.tooplate.com/view/2076-zentro
 
 /* contact section */
 #homepageContainer #contact {
-<<<<<<< HEAD
     padding-top: 80px;
     padding-bottom: 100px;
 }
@@ -360,49 +359,54 @@ http://www.tooplate.com/view/2076-zentro
             #homepageContainer #contact input[type="submit"]:hover {
                 background: #999;
                 color: #ffffff;
+                padding-top: 80px;
+                padding-bottom: 100px;
             }
-=======
-  padding-top: 80px;
-  padding-bottom: 100px;
-}
+
+
+
 #homepageContainer #contact .col-md-8 {
-  margin-bottom: 32px;
-}
-#homepageContainer #contact .form-control {
-  background: #ffffff;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  transition: all 0.4s ease-in-out;
-}
-#homepageContainer #contact .form-control:focus {
-  border-color: #f9f9f9;
-}
-#homepageContainer #contact #homeregbutton {
-  height: 48px;
-}
-#homepageContainer #contact #homeregbutton[type="submit"] {
-  background: transparent;
-  border: 2px solid #999;
-  border-radius: 10px;
-  letter-spacing: 2px;
-  margin-top: 12px;
-  height: 50px;
-}
-#homepageContainer #contact #homeregbutton[type="submit"]:hover {
-  background: #999;
-  color: #ffffff;
+    margin-bottom: 32px;
 }
 
-#homepageContainer #homeregbutton {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 900;
-      padding-top: 1em;
-      letter-spacing: 4px;
+#homepageContainer #contact .form-control {
+    background: #ffffff;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    transition: all 0.4s ease-in-out;
 }
->>>>>>> 8ef11df80538b98035f9e3053be62a1b6bc25ec8
+
+    #homepageContainer #contact .form-control:focus {
+        border-color: #f9f9f9;
+    }
+
+#homepageContainer #contact #homeregbutton {
+    height: 48px;
+}
+
+    #homepageContainer #contact #homeregbutton[type="submit"] {
+        background: transparent;
+        border: 2px solid #999;
+        border-radius: 10px;
+        letter-spacing: 2px;
+        margin-top: 12px;
+        height: 50px;
+    }
+
+        #homepageContainer #contact #homeregbutton[type="submit"]:hover {
+            background: #999;
+            color: #ffffff;
+        }
+
+#homepageContainer #homeregbutton {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    padding-top: 1em;
+    letter-spacing: 4px;
+}
 
 /* footer section */
 #homepageContainer footer {
@@ -415,32 +419,32 @@ http://www.tooplate.com/view/2076-zentro
     padding-bottom: 80px;
 }
 
-    #homepageContainer footer h2 {
-        padding-bottom: 14px;
-    }
+#homepageContainer footer h2 {
+    padding-bottom: 14px;
+}
 
-    #homepageContainer footer h3 {
-        padding-top: 8px;
-    }
+#homepageContainer footer h3 {
+    padding-top: 8px;
+}
 
-    #homepageContainer footer p {
-        color: #ffffff;
-    }
+#homepageContainer footer p {
+    color: #ffffff;
+}
 
-    #homepageContainer footer span {
-        font-weight: bold;
-        padding-left: 24px;
-    }
+#homepageContainer footer span {
+    font-weight: bold;
+    padding-left: 24px;
+}
 
-    #homepageContainer footer .ph, footer .address {
-        padding-top: 12px;
-        padding-bottom: 12px;
-    }
+#homepageContainer footer .ph, footer .address {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
 
-    #homepageContainer footer .fa {
-        font-size: 12px;
-        padding-right: 10px;
-    }
+#homepageContainer footer .fa {
+    font-size: 12px;
+    padding-right: 10px;
+}
 
 /* social icon */
 #homepageContainer .social-icon {
@@ -484,29 +488,30 @@ http://www.tooplate.com/view/2076-zentro
     padding-bottom: 80px;
     text-align: center;
 }
-<<<<<<< HEAD
 
-    #homepageContainer #copyright p {
-        color: #ffffff;
-    }
-
-    #homepageContainer #copyright a {
-        color: #ffffff;
-    }
-
-        #homepageContainer #copyright a:hover {
-            color: #FF0;
-        }
-=======
-#homepageContainer #copyright p {
-  color: #ffffff;
+ #homepageContainer #copyright p {
+    color: #ffffff;
 }
+
 #homepageContainer #copyright a {
-  color: #ffffff;
+    color: #ffffff;
 }
-#homepageContainer #copyright a:hover {
-  color: #FF0;
+
+    #homepageContainer #copyright a:hover {
+        color: #FF0;
+    }
+
+ #homepageContainer #copyright p {
+    color: #ffffff;
 }
+
+#homepageContainer #copyright a {
+    color: #ffffff;
+}
+
+    #homepageContainer #copyright a:hover {
+        color: #FF0;
+    }
 
 #homepageContainer #how {
     margin-top: 1em;
@@ -519,7 +524,7 @@ http://www.tooplate.com/view/2076-zentro
     inventory section home page
 *********************************/
 #inventorysection {
- margin-top: 3em;
+    margin-top: 3em;
 }
 /***********************
      BEEF
@@ -528,68 +533,73 @@ http://www.tooplate.com/view/2076-zentro
 .details {
     padding-top: 7em;
     font-weight: bolder;
-    
 }
+
 .back .details {
     padding-top: 25%;
 }
 
 .flip-container:hover .creation {
-  -webkit-transform:rotateY(180deg);
-  -moz-transform:rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
 }
+
 .creation {
-  width:350px;
-  height:350px;
-  margin: 10px;
-  -webkit-transition:all 0.6s;
-  -moz-transition:all 0.6s;
-  transition:all 0.6s;
-  -webkit-transform-style:preserve-3d;
-  -moz-transform-style:preserve-3d;
-  transform-style:preserve-3d;
+    width: 350px;
+    height: 350px;
+    margin: 10px;
+    -webkit-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+    transition: all 0.6s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
 }
+
 .front, .back {
-  position:absolute;
-  top:0;
-  left:0;
-  -webkit-backface-visibility:hidden; 
-  -moz-backface-visibility:hidden;
-  backface-visibility:hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .back {
-  z-index:800;
-  -webkit-transform:rotateY(-180deg);
-  -moz-transform:rotateY(-180deg);
-  transform:rotateY(-180deg);
-}
-.creation p {
-  color:#666;
-  display:block;
-  width:auto;
-  text-align:center;
-  line-height:200px;
-  margin:0 30px;
-  font-size:27px;
-  text-transform:uppercase;
-  text-shadow:1px 1px 1px #999;
-  font-family:sans-serif;
-}
-.creation p span {
-  vertical-align:middle;
-  display:inline-block;
-  line-height:1.4;
-}
-.cont {
-  border-radius:50%;
-  width:350px; 
-  height:350px;
-  display:inline-block;
-  border:8px solid #1abc9c;
+    z-index: 800;
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
 }
 
-#beef .flip-container .creation .front .cont  {
+.creation p {
+    color: #666;
+    display: block;
+    width: auto;
+    text-align: center;
+    line-height: 200px;
+    margin: 0 30px;
+    font-size: 27px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px #999;
+    font-family: sans-serif;
+}
+
+    .creation p span {
+        vertical-align: middle;
+        display: inline-block;
+        line-height: 1.4;
+    }
+
+.cont {
+    border-radius: 50%;
+    width: 350px;
+    height: 350px;
+    display: inline-block;
+    border: 8px solid #1abc9c;
+}
+
+#beef .flip-container .creation .front .cont {
     background-image: url('../images/beef_veggie_morsels.jpg');
     background-size: cover;
 }
@@ -639,21 +649,19 @@ http://www.tooplate.com/view/2076-zentro
     background-size: cover;
 }
 
-/* Custom, iPhone Retina */ 
+/* Custom, iPhone Retina */
 @media only screen and (min-width : 320px) {
     .creation {
         margin: 10px auto !important;
     }
 }
 
-/* Extra Small Devices, Phones */ 
+/* Extra Small Devices, Phones */
 @media only screen and (min-width : 480px) {
-  
 }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
-    
 }
 
 /* Medium Devices, Desktops */
@@ -662,6 +670,7 @@ http://www.tooplate.com/view/2076-zentro
         width: 250px;
         height: 300px;
     }
+
     .cont {
         width: 300px;
         height: 300px;
@@ -674,9 +683,9 @@ http://www.tooplate.com/view/2076-zentro
         width: 350px;
         height: 350px;
     }
+
     .cont {
         width: 350px;
         height: 350px;
     }
 }
->>>>>>> 8ef11df80538b98035f9e3053be62a1b6bc25ec8
