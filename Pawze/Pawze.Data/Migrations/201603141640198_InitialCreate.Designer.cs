@@ -13,7 +13,7 @@ namespace Pawze.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201602250032004_InitialCreate"; }
+            get { return "201603141640198_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

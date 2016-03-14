@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Pawze.Core.Infrastructure
 {
+    // THis is a UTILITY CLASS
+    // helps dispose of objects in the correct manner
     public class Disposable : IDisposable
     {
         private bool _disposed;

@@ -68,17 +68,9 @@
     <Compile Include="Infrastructure\Repository.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Infrastructure\UserStore.cs" />
-    <Compile Include="Migrations\201602250032004_InitialCreate.cs" />
-    <Compile Include="Migrations\201602250032004_InitialCreate.Designer.cs">
-      <DependentUpon>201602250032004_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603011807326_implementing stripe.cs" />
-    <Compile Include="Migrations\201603011807326_implementing stripe.Designer.cs">
-      <DependentUpon>201603011807326_implementing stripe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603011808513_removed boxId from subscription domain and model.cs" />
-    <Compile Include="Migrations\201603011808513_removed boxId from subscription domain and model.Designer.cs">
-      <DependentUpon>201603011808513_removed boxId from subscription domain and model.cs</DependentUpon>
+    <Compile Include="Migrations\201603141640198_InitialCreate.cs" />
+    <Compile Include="Migrations\201603141640198_InitialCreate.Designer.cs">
+      <DependentUpon>201603141640198_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,14 +97,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201602250032004_InitialCreate.resx">
-      <DependentUpon>201602250032004_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603011807326_implementing stripe.resx">
-      <DependentUpon>201603011807326_implementing stripe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603011808513_removed boxId from subscription domain and model.resx">
-      <DependentUpon>201603011808513_removed boxId from subscription domain and model.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603141640198_InitialCreate.resx">
+      <DependentUpon>201603141640198_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
